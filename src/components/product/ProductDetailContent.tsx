@@ -28,7 +28,7 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
   const [activeAccordion, setActiveAccordion] = useState<string | null>('details');
   const [isAdding, setIsAdding] = useState(false);
-  const { addToCart } = useCart();
+  const { cart, addToCart } = useCart();
 
   // Initialize selections with first available options
   useEffect(() => {
@@ -78,18 +78,31 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
     if (!selectedSize || !selectedColor) return;
     addToCart(product, selectedSize, selectedColor, quantity);
 
-    const singleItemCart = [{
-      id: `${product.id}-${selectedSize}-${selectedColor}`,
-      productId: product.id,
-      title: product.title,
-      price: product.price,
-      currency: product.currency || 'LKR',
-      selectedSize,
-      selectedColor,
-      quantity,
-      image: product.images[0] || ''
-    }];
-    const directUrl = buildWhatsAppCartOrderUrl(singleItemCart);
+    // Calculate the updated cart including this new item
+    const newItemId = `${product.id}-${selectedSize}-${selectedColor}`;
+    const existingItemIdx = cart.findIndex((item) => item.id === newItemId);
+
+    const updatedCart = [...cart];
+    if (existingItemIdx > -1) {
+      updatedCart[existingItemIdx] = {
+        ...updatedCart[existingItemIdx],
+        quantity: updatedCart[existingItemIdx].quantity + quantity,
+      };
+    } else {
+      updatedCart.push({
+        id: newItemId,
+        productId: product.id,
+        title: product.title,
+        price: product.price,
+        currency: product.currency || 'LKR',
+        selectedSize,
+        selectedColor,
+        quantity,
+        image: product.images[0] || '',
+      });
+    }
+
+    const directUrl = buildWhatsAppCartOrderUrl(updatedCart);
     window.open(directUrl, '_blank');
 
     logAnalyticsEvent('whatsapp_click', {
@@ -98,7 +111,7 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
       size: selectedSize,
       color: selectedColor,
       quantity,
-      action_type: 'buy_now'
+      action_type: 'buy_now',
     });
   };
 

@@ -5,7 +5,7 @@
 import { Product, OrderOptions, CartItem } from '@/types';
 
 // Placeholder WhatsApp number — update in .env.local
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '94700000000';
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '94774947394';
 
 /**
  * Build a WhatsApp deep link with a pre-filled order message
