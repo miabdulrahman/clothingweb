@@ -49,6 +49,8 @@ export default function AdminLoginPage() {
           throw authError;
         }
 
+        // Wait a short moment for cookies to be set before redirecting
+        await new Promise((resolve) => setTimeout(resolve, 600));
         router.refresh();
         router.push('/admin');
       }
