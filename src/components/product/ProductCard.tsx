@@ -38,12 +38,12 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
   return (
     <div
-      className="group flex flex-col h-full bg-brand-cream dark:bg-[#1E1E1E] border border-brand-charcoal/5 dark:border-white/10 transition-colors duration-300"
+      className="group flex flex-col h-full bg-brand-cream border border-brand-charcoal/5"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Product Image Wrapper */}
-      <Link href={`/product/${product.slug}`} className="relative block overflow-hidden aspect-[3/4] bg-brand-beige/10 dark:bg-black/20">
+      <Link href={`/product/${product.slug}`} className="relative block overflow-hidden aspect-[3/4] bg-brand-beige/10">
         {/* Style Label Badge */}
         {product.style_label && (
           <div className="absolute top-3 left-3 z-10">
@@ -55,8 +55,8 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
 
         {/* Out of Stock Overlay */}
         {!product.in_stock && (
-          <div className="absolute inset-0 bg-brand-charcoal/40 dark:bg-black/60 backdrop-blur-[2px] z-10 flex items-center justify-center">
-            <Badge variant="primary" className="text-xs px-4 py-2 border border-brand-cream/30 dark:border-white/30">
+          <div className="absolute inset-0 bg-brand-charcoal/40 backdrop-blur-[2px] z-10 flex items-center justify-center">
+            <Badge variant="primary" className="text-xs px-4 py-2 border border-brand-cream/30">
               Sold Out
             </Badge>
           </div>
@@ -87,25 +87,25 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
       <div className="p-4 flex-grow flex flex-col justify-between space-y-4">
         <div className="space-y-1">
           {product.category?.name && (
-            <p className="text-[10px] uppercase tracking-widest text-brand-charcoal/50 dark:text-brand-cream/50 font-semibold">
+            <p className="text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">
               {product.category.name}
             </p>
           )}
           <Link href={`/product/${product.slug}`}>
-            <h3 className="font-display font-medium text-sm text-brand-charcoal dark:text-brand-cream hover:text-brand-gold dark:hover:text-brand-gold transition-colors tracking-wide leading-snug">
+            <h3 className="font-display font-medium text-sm text-brand-charcoal hover:text-brand-gold transition-colors tracking-wide leading-snug">
               {product.title}
             </h3>
           </Link>
-          <p className="text-sm font-semibold tracking-wider text-brand-charcoal/90 dark:text-brand-cream/90">
+          <p className="text-sm font-semibold tracking-wider text-brand-charcoal/90">
             {formattedPrice}
           </p>
         </div>
 
         {/* Actions */}
-        <div className="flex gap-2 pt-2 border-t border-brand-charcoal/5 dark:border-white/10">
+        <div className="flex gap-2 pt-2 border-t border-brand-charcoal/5">
           <Link
             href={`/product/${product.slug}`}
-            className="w-1/2 inline-flex items-center justify-center py-2.5 text-[10px] font-semibold uppercase tracking-widest border border-brand-charcoal dark:border-brand-cream text-brand-charcoal dark:text-brand-cream hover:bg-brand-charcoal dark:hover:bg-brand-cream hover:text-brand-cream dark:hover:text-brand-charcoal transition-colors duration-300 rounded-none text-center"
+            className="w-1/2 inline-flex items-center justify-center py-2.5 text-[10px] font-semibold uppercase tracking-widest border border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-brand-cream transition-colors duration-300 rounded-none text-center"
           >
             Details
           </Link>
@@ -113,14 +113,14 @@ export default function ProductCard({ product, priority = false }: ProductCardPr
           {product.in_stock ? (
             <button
               onClick={handleAddToCart}
-              className="w-1/2 inline-flex items-center justify-center py-2.5 text-[10px] font-semibold uppercase tracking-widest bg-brand-charcoal dark:bg-brand-cream text-brand-cream dark:text-brand-charcoal hover:bg-brand-gold dark:hover:bg-brand-gold hover:text-brand-charcoal dark:hover:text-brand-charcoal transition-colors duration-300 rounded-none cursor-pointer text-center"
+              className="w-1/2 inline-flex items-center justify-center py-2.5 text-[10px] font-semibold uppercase tracking-widest bg-brand-charcoal text-brand-cream hover:bg-brand-gold hover:text-brand-charcoal transition-colors duration-300 rounded-none cursor-pointer text-center"
             >
               Add to Cart
             </button>
           ) : (
             <button
               disabled
-              className="w-1/2 inline-flex items-center justify-center py-2.5 text-[10px] font-semibold uppercase tracking-widest bg-brand-charcoal/10 dark:bg-white/5 text-brand-charcoal/30 dark:text-brand-cream/30 rounded-none cursor-not-allowed text-center"
+              className="w-1/2 inline-flex items-center justify-center py-2.5 text-[10px] font-semibold uppercase tracking-widest bg-brand-charcoal/10 text-brand-charcoal/30 rounded-none cursor-not-allowed text-center"
             >
               Sold Out
             </button>

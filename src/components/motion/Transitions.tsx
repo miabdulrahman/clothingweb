@@ -16,7 +16,7 @@ export function FadeIn({ children, className, delay = 0, duration = 0.5 }: Anima
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration, delay, ease: 'easeOut' }}
       className={className}
     >
       {children}
@@ -42,7 +42,7 @@ export function ScaleOnHover({ children, className }: { children: React.ReactNod
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
       className={className}
     >
       {children}

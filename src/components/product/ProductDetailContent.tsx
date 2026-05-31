@@ -145,14 +145,14 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
         {/* Right: Info */}
         <div className="space-y-6 md:sticky md:top-32">
           {/* Breadcrumbs */}
-          <div className="flex items-center space-x-2 text-[10px] uppercase tracking-widest text-brand-charcoal/50 dark:text-brand-cream/50 font-semibold">
-            <Link href="/" className="hover:text-brand-charcoal dark:hover:text-brand-cream transition-colors">Home</Link>
+          <div className="flex items-center space-x-2 text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">
+            <Link href="/" className="hover:text-brand-charcoal transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/catalog" className="hover:text-brand-charcoal dark:hover:text-brand-cream transition-colors">Catalog</Link>
+            <Link href="/catalog" className="hover:text-brand-charcoal transition-colors">Catalog</Link>
             {product.category && (
               <>
                 <span>/</span>
-                <Link href={`/catalog?category=${product.category.slug}`} className="hover:text-brand-charcoal dark:hover:text-brand-cream transition-colors">
+                <Link href={`/catalog?category=${product.category.slug}`} className="hover:text-brand-charcoal transition-colors">
                   {product.category.name}
                 </Link>
               </>
@@ -162,7 +162,7 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
           {/* Title and Style Label */}
           <div className="space-y-2">
             <div className="flex items-baseline justify-between gap-4">
-              <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream leading-snug">
+              <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-wider text-brand-charcoal leading-snug">
                 {product.title}
               </h1>
               {product.style_label && (
@@ -171,15 +171,15 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
                 </Badge>
               )}
             </div>
-            <p className="text-xl font-bold tracking-wider text-brand-charcoal dark:text-brand-cream">
+            <p className="text-xl font-bold tracking-wider text-brand-charcoal">
               {formattedPrice}
             </p>
           </div>
 
-          <hr className="border-brand-charcoal/10 dark:border-white/10" />
+          <hr className="border-brand-charcoal/10" />
 
           {/* Description */}
-          <p className="text-sm font-light text-brand-charcoal/70 dark:text-brand-cream/70 leading-relaxed">
+          <p className="text-sm font-light text-brand-charcoal/70 leading-relaxed">
             {product.description}
           </p>
 
@@ -214,7 +214,7 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
                   <button
                     onClick={handleAddToCart}
                     disabled={isAdding}
-                    className="w-full inline-flex items-center justify-center py-4 bg-brand-charcoal dark:bg-brand-cream text-brand-cream dark:text-brand-charcoal hover:bg-brand-charcoal/90 dark:hover:bg-brand-cream/90 transition-colors rounded-none font-semibold uppercase tracking-widest text-xs shadow-sm cursor-pointer disabled:opacity-85"
+                    className="w-full inline-flex items-center justify-center py-4 bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 transition-colors rounded-none font-semibold uppercase tracking-widest text-xs shadow-sm cursor-pointer disabled:opacity-85"
                   >
                     {isAdding ? 'Added to Bag' : 'Add to Bag'}
                   </button>
@@ -228,7 +228,7 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
                     <span>WhatsApp Buy</span>
                   </button>
                 </div>
-                <div className="flex items-center justify-center space-x-2 text-[10px] font-semibold text-brand-charcoal/50 dark:text-brand-cream/50 uppercase tracking-wider">
+                <div className="flex items-center justify-center space-x-2 text-[10px] font-semibold text-brand-charcoal/50 uppercase tracking-wider">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                   </svg>
@@ -241,36 +241,36 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
               <Button disabled fullWidth className="py-4">
                 Sold Out
               </Button>
-              <p className="text-xs text-brand-charcoal/50 dark:text-brand-cream/50 italic text-center font-light">
+              <p className="text-xs text-brand-charcoal/50 italic text-center font-light">
                 This item is currently out of stock. Contact us on WhatsApp to inquire about restock times.
               </p>
             </div>
           )}
 
-          <hr className="border-brand-charcoal/10 dark:border-white/10" />
+          <hr className="border-brand-charcoal/10" />
 
           {/* Product Details Accordion */}
           <div className="space-y-2 select-none">
             {/* Details Section */}
-            <div className="border-b border-brand-charcoal/10 dark:border-white/10 pb-2">
+            <div className="border-b border-brand-charcoal/10 pb-2">
               <button
                 onClick={() => toggleAccordion('details')}
-                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream focus:outline-none"
+                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal focus:outline-none"
               >
                 <span>Product details</span>
                 <span className="text-base">{activeAccordion === 'details' ? '−' : '+'}</span>
               </button>
               {activeAccordion === 'details' && (
-                <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 dark:text-brand-cream/70 space-y-2 leading-relaxed">
+                <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 space-y-2 leading-relaxed">
                   <p>{product.full_description || product.description}</p>
                   {product.fabric && (
                     <p>
-                      <span className="font-semibold text-brand-charcoal dark:text-brand-cream">Fabric:</span> {product.fabric}
+                      <span className="font-semibold text-brand-charcoal">Fabric:</span> {product.fabric}
                     </p>
                   )}
                   {product.care && (
                     <p>
-                      <span className="font-semibold text-brand-charcoal dark:text-brand-cream">Care:</span> {product.care}
+                      <span className="font-semibold text-brand-charcoal">Care:</span> {product.care}
                     </p>
                   )}
                 </div>
@@ -279,16 +279,16 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
 
             {/* Fit Notes Section */}
             {product.fit_notes && (
-              <div className="border-b border-brand-charcoal/10 dark:border-white/10 pb-2">
+              <div className="border-b border-brand-charcoal/10 pb-2">
                 <button
                   onClick={() => toggleAccordion('fit')}
-                  className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream focus:outline-none"
+                  className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal focus:outline-none"
                 >
                   <span>Size & fit notes</span>
                   <span className="text-base">{activeAccordion === 'fit' ? '−' : '+'}</span>
                 </button>
                 {activeAccordion === 'fit' && (
-                  <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 dark:text-brand-cream/70 leading-relaxed">
+                  <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 leading-relaxed">
                     <p>{product.fit_notes}</p>
                   </div>
                 )}
@@ -296,16 +296,16 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
             )}
 
             {/* Delivery Section */}
-            <div className="border-b border-brand-charcoal/10 dark:border-white/10 pb-2">
+            <div className="border-b border-brand-charcoal/10 pb-2">
               <button
                 onClick={() => toggleAccordion('delivery')}
-                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream focus:outline-none"
+                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal focus:outline-none"
               >
                 <span>Delivery & exchanges</span>
                 <span className="text-base">{activeAccordion === 'delivery' ? '−' : '+'}</span>
               </button>
               {activeAccordion === 'delivery' && (
-                <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 dark:text-brand-cream/70 space-y-2 leading-relaxed">
+                <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 space-y-2 leading-relaxed">
                   <p>Standard Delivery: 2-5 business days islandwide in Sri Lanka.</p>
                   <p>Exchange Policy: We offer size exchanges within 7 days of delivery, provided tags are attached and the garment is in original condition.</p>
                 </div>
@@ -317,10 +317,10 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
 
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (
-        <div className="space-y-8 pt-10 border-t border-brand-charcoal/10 dark:border-white/10">
+        <div className="space-y-8 pt-10 border-t border-brand-charcoal/10">
           <div className="space-y-1">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-gold">Complete the look</p>
-            <h2 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream">
+            <h2 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wider text-brand-charcoal">
               Related Pieces
             </h2>
           </div>
@@ -334,16 +334,16 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
 
       {/* Sticky Bottom CTA (Mobile Only) */}
       {product.in_stock && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 bg-brand-cream dark:bg-[#1E1E1E] border-t border-brand-charcoal/10 dark:border-white/10 p-3 flex items-center justify-between gap-4 md:hidden shadow-lg select-none">
+        <div className="fixed bottom-0 left-0 right-0 z-30 bg-brand-cream border-t border-brand-charcoal/10 p-3 flex items-center justify-between gap-4 md:hidden shadow-lg select-none">
           <div className="flex-shrink-0">
-            <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 dark:text-brand-cream/50 font-semibold">Price</p>
-            <p className="text-sm font-bold tracking-wider text-brand-charcoal dark:text-brand-cream leading-none">{formattedPrice}</p>
+            <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Price</p>
+            <p className="text-sm font-bold tracking-wider text-brand-charcoal leading-none">{formattedPrice}</p>
           </div>
           <div className="flex-grow grid grid-cols-2 gap-2">
             <button
               onClick={handleAddToCart}
               disabled={isAdding}
-              className="inline-flex items-center justify-center py-3 bg-brand-charcoal dark:bg-brand-cream text-brand-cream dark:text-brand-charcoal hover:bg-brand-charcoal/90 dark:hover:bg-brand-cream/90 transition-colors rounded-none font-semibold uppercase tracking-widest text-[10px] cursor-pointer disabled:opacity-80"
+              className="inline-flex items-center justify-center py-3 bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 transition-colors rounded-none font-semibold uppercase tracking-widest text-[10px] cursor-pointer disabled:opacity-80"
             >
               {isAdding ? 'Added' : 'Add Bag'}
             </button>
@@ -360,20 +360,20 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
       {/* Size Guide Modal */}
       <Modal isOpen={isSizeGuideOpen} onClose={() => setIsSizeGuideOpen(false)} title="Size Guide">
         <div className="space-y-6">
-          <p className="text-xs font-light text-brand-charcoal/70 dark:text-brand-cream/70 leading-relaxed">
+          <p className="text-xs font-light text-brand-charcoal/70 leading-relaxed">
             Our items are custom engineered for a loose, relaxed fit. Choose your standard size for an oversized look, or size down for a more structured fit.
           </p>
-          <div className="overflow-x-auto border border-brand-charcoal/10 dark:border-white/10">
+          <div className="overflow-x-auto border border-brand-charcoal/10">
             <table className="w-full text-xs text-left border-collapse">
               <thead>
-                <tr className="bg-brand-charcoal/5 dark:bg-white/5 border-b border-brand-charcoal/10 dark:border-white/10">
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-brand-cream">Size</th>
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-brand-cream">Chest (in)</th>
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-brand-cream">Length (in)</th>
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-brand-cream">Sleeve (in)</th>
+                <tr className="bg-brand-charcoal/5 border-b border-brand-charcoal/10">
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Size</th>
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Chest (in)</th>
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Length (in)</th>
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Sleeve (in)</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-charcoal/10 dark:divide-white/10 font-light text-brand-charcoal dark:text-brand-cream">
+              <tbody className="divide-y divide-brand-charcoal/10 font-light">
                 <tr>
                   <td className="p-3 font-medium">S</td>
                   <td className="p-3">42</td>
@@ -401,11 +401,11 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
               </tbody>
             </table>
           </div>
-          <div className="border-t border-brand-charcoal/10 dark:border-white/10 pt-4 flex justify-between items-center text-[10px] uppercase font-semibold text-brand-charcoal/50 dark:text-brand-cream/50 tracking-wider">
+          <div className="border-t border-brand-charcoal/10 pt-4 flex justify-between items-center text-[10px] uppercase font-semibold text-brand-charcoal/50 tracking-wider">
             <span>Kurta/Duster lengths: 40 - 58 inches long</span>
             <button
               onClick={() => setIsSizeGuideOpen(false)}
-              className="text-brand-gold underline hover:text-brand-charcoal dark:hover:text-brand-cream transition-colors cursor-pointer"
+              className="text-brand-gold underline hover:text-brand-charcoal transition-colors cursor-pointer"
             >
               Close Guide
             </button>

@@ -12,12 +12,12 @@ interface SizeSelectorProps {
 export function SizeSelector({ sizes, selectedSize, onChange, onOpenSizeGuide }: SizeSelectorProps) {
   return (
     <div className="space-y-3">
-      <div className="flex justify-between items-center text-xs font-semibold uppercase tracking-widest text-brand-charcoal/80 dark:text-brand-cream/80">
+      <div className="flex justify-between items-center text-xs font-semibold uppercase tracking-widest text-brand-charcoal/80">
         <span>Select Size</span>
         {onOpenSizeGuide && (
           <button
             onClick={onOpenSizeGuide}
-            className="text-[10px] text-brand-gold underline hover:text-brand-charcoal dark:hover:text-brand-cream transition-colors cursor-pointer"
+            className="text-[10px] text-brand-gold underline hover:text-brand-charcoal transition-colors cursor-pointer"
           >
             Size Guide
           </button>
@@ -33,8 +33,8 @@ export function SizeSelector({ sizes, selectedSize, onChange, onOpenSizeGuide }:
               className={cn(
                 'min-w-12 h-12 flex items-center justify-center border text-xs font-semibold tracking-wider transition-all duration-200 cursor-pointer rounded-none',
                 isSelected
-                  ? 'border-brand-charcoal bg-brand-charcoal text-brand-cream dark:border-brand-cream dark:bg-brand-cream dark:text-brand-charcoal'
-                  : 'border-brand-charcoal/10 dark:border-white/10 hover:border-brand-charcoal/50 dark:hover:border-white/50 text-brand-charcoal dark:text-brand-cream'
+                  ? 'border-brand-charcoal bg-brand-charcoal text-brand-cream'
+                  : 'border-brand-charcoal/10 hover:border-brand-charcoal/50 text-brand-charcoal'
               )}
             >
               {size}
@@ -55,8 +55,8 @@ interface ColorSelectorProps {
 export function ColorSelector({ colors, selectedColor, onChange }: ColorSelectorProps) {
   return (
     <div className="space-y-3">
-      <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-charcoal/80 dark:text-brand-cream/80">
-        Select Color: <span className="font-light tracking-normal lowercase dark:text-brand-cream/90">{selectedColor}</span>
+      <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-charcoal/80">
+        Select Color: <span className="font-light tracking-normal lowercase">{selectedColor}</span>
       </h4>
       <div className="flex flex-wrap gap-3">
         {colors.map((color) => {
@@ -68,8 +68,8 @@ export function ColorSelector({ colors, selectedColor, onChange }: ColorSelector
               className={cn(
                 'px-4 py-2 border text-[10px] font-semibold uppercase tracking-widest transition-all duration-200 cursor-pointer rounded-none',
                 isSelected
-                  ? 'border-brand-charcoal bg-brand-charcoal text-brand-cream dark:border-brand-cream dark:bg-brand-cream dark:text-brand-charcoal'
-                  : 'border-brand-charcoal/10 dark:border-white/10 hover:border-brand-charcoal/50 dark:hover:border-white/50 text-brand-charcoal dark:text-brand-cream'
+                  ? 'border-brand-charcoal bg-brand-charcoal text-brand-cream'
+                  : 'border-brand-charcoal/10 hover:border-brand-charcoal/50 text-brand-charcoal'
               )}
             >
               {color}
@@ -98,25 +98,25 @@ export function QuantitySelector({ value, onChange, max = 10 }: QuantitySelector
 
   return (
     <div className="space-y-3">
-      <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-charcoal/80 dark:text-brand-cream/80">
+      <h4 className="text-xs font-semibold uppercase tracking-widest text-brand-charcoal/80">
         Quantity
       </h4>
-      <div className="inline-flex items-center border border-brand-charcoal/15 dark:border-white/15 bg-brand-cream dark:bg-[#1E1E1E]">
+      <div className="inline-flex items-center border border-brand-charcoal/15 bg-brand-cream">
         <button
           onClick={handleDecrement}
-          className="w-10 h-10 flex items-center justify-center text-brand-charcoal/70 dark:text-brand-cream/70 hover:text-brand-charcoal dark:hover:text-brand-cream hover:bg-brand-charcoal/5 dark:hover:bg-brand-cream/5 transition-colors cursor-pointer"
+          className="w-10 h-10 flex items-center justify-center text-brand-charcoal/70 hover:text-brand-charcoal hover:bg-brand-charcoal/5 transition-colors cursor-pointer"
           disabled={value <= 1}
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
           </svg>
         </button>
-        <span className="w-12 text-center text-xs font-semibold tracking-wider text-brand-charcoal dark:text-brand-cream select-none">
+        <span className="w-12 text-center text-xs font-semibold tracking-wider text-brand-charcoal select-none">
           {value}
         </span>
         <button
           onClick={handleIncrement}
-          className="w-10 h-10 flex items-center justify-center text-brand-charcoal/70 dark:text-brand-cream/70 hover:text-brand-charcoal dark:hover:text-brand-cream hover:bg-brand-charcoal/5 dark:hover:bg-brand-cream/5 transition-colors cursor-pointer"
+          className="w-10 h-10 flex items-center justify-center text-brand-charcoal/70 hover:text-brand-charcoal hover:bg-brand-charcoal/5 transition-colors cursor-pointer"
           disabled={value >= max}
         >
           <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">

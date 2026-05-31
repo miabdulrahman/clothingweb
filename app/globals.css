@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
   --color-brand-charcoal: #2D2D2D;
   --color-brand-cream: #FAF9F6;
@@ -45,21 +43,12 @@
 ::-webkit-scrollbar-track {
   background: var(--color-brand-cream);
 }
-.dark ::-webkit-scrollbar-track {
-  background: #121212;
-}
 ::-webkit-scrollbar-thumb {
   background: var(--color-brand-beige);
   border-radius: 3px;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #2D2D2D;
-}
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-brand-gold);
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-brand-beige);
 }
 
 /* Base resets & styling */
@@ -77,21 +66,10 @@ body {
   flex-direction: column;
 }
 
-/* Apply smooth transitions to background and text colors globally */
-html, body, header, main, footer, aside, nav, tr, td, th, div, span, button, input, select, textarea {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-}
-
 /* Editorial selection color */
 ::selection {
   background-color: var(--color-brand-beige);
   color: var(--color-brand-charcoal);
-}
-.dark ::selection {
-  background-color: var(--color-brand-gold);
-  color: var(--color-brand-cream);
 }
 
 /* Smooth active scroll container */
@@ -111,23 +89,9 @@ html, body, header, main, footer, aside, nav, tr, td, th, div, span, button, inp
   border-bottom: 1px solid rgba(45, 45, 45, 0.05);
 }
 
-.dark .glass {
-  background: rgba(18, 18, 18, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(250, 249, 246, 0.08);
-}
-
 .glass-dark {
   background: rgba(45, 45, 45, 0.8);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(250, 249, 246, 0.1);
-}
-
-.dark .glass-dark {
-  background: rgba(20, 20, 20, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(250, 249, 246, 0.05);
 }

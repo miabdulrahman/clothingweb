@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { useCart } from '@/context/CartContext';
-import { useTheme } from '@/context/ThemeContext';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -23,7 +22,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { cartCount, setCartOpen } = useCart();
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,7 +75,7 @@ export default function Navbar() {
             <div className="flex-shrink-0">
               <Link
                 href="/"
-                className="font-display text-2xl font-bold tracking-widest text-brand-charcoal dark:text-brand-cream hover:text-brand-gold dark:hover:text-brand-gold transition-colors duration-300"
+                className="font-display text-2xl font-bold tracking-widest text-brand-charcoal"
               >
                 AUREN
               </Link>
@@ -94,15 +92,15 @@ export default function Navbar() {
                     className={cn(
                       'text-sm font-medium tracking-wider uppercase transition-colors relative py-1',
                       isActive
-                        ? 'text-brand-charcoal dark:text-brand-cream font-semibold'
-                        : 'text-brand-charcoal/70 dark:text-brand-cream/70 hover:text-brand-charcoal dark:hover:text-brand-cream'
+                        ? 'text-brand-charcoal font-semibold'
+                        : 'text-brand-charcoal/70 hover:text-brand-charcoal'
                     )}
                   >
                     {link.label}
                     {isActive && (
                       <motion.span
                         layoutId="activeNavLine"
-                        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-brand-charcoal dark:bg-brand-cream"
+                        className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-brand-charcoal"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
@@ -111,31 +109,11 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* CTA Button (Quick Catalog Link), Theme Switcher & Cart Toggle */}
-            <div className="hidden md:flex items-center space-x-4">
-              {/* Theme Toggle Button */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 text-brand-charcoal dark:text-brand-cream hover:text-brand-gold dark:hover:text-brand-gold focus:outline-none transition-colors duration-300 cursor-pointer rounded-full"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  // Sun Icon
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                ) : (
-                  // Moon Icon
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                )}
-              </button>
-
-              {/* Cart Toggle */}
+            {/* CTA Button (Quick Catalog Link) & Cart Toggle */}
+            <div className="hidden md:flex items-center space-x-5">
               <button
                 onClick={() => setCartOpen(true)}
-                className="p-2 text-brand-charcoal dark:text-brand-cream hover:text-brand-gold dark:hover:text-brand-gold focus:outline-none transition-colors duration-300 relative cursor-pointer"
+                className="p-2 text-brand-charcoal hover:text-brand-gold focus:outline-none transition-colors relative cursor-pointer"
                 aria-label="Open cart"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -147,38 +125,19 @@ export default function Navbar() {
                   </span>
                 )}
               </button>
-
               <Link
                 href="/catalog"
-                className="inline-flex items-center justify-center px-5 py-2 text-xs font-semibold uppercase tracking-widest border border-brand-charcoal dark:border-brand-cream hover:bg-brand-charcoal hover:text-brand-cream dark:text-brand-cream dark:hover:bg-brand-cream dark:hover:text-brand-charcoal transition-all duration-300 ease-in-out rounded-none"
+                className="inline-flex items-center justify-center px-5 py-2 text-xs font-semibold uppercase tracking-widest border border-brand-charcoal hover:bg-brand-charcoal hover:text-brand-cream transition-all duration-300 ease-in-out rounded-none"
               >
                 Shop Collection
               </Link>
             </div>
 
             {/* Mobile actions & menu button */}
-            <div className="md:hidden flex items-center space-x-1">
-              {/* Theme Toggle Button */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 text-brand-charcoal dark:text-brand-cream hover:text-brand-gold dark:hover:text-brand-gold focus:outline-none transition-colors duration-300 cursor-pointer"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                )}
-              </button>
-
-              {/* Cart Toggle */}
+            <div className="md:hidden flex items-center space-x-2">
               <button
                 onClick={() => setCartOpen(true)}
-                className="p-2 text-brand-charcoal dark:text-brand-cream hover:text-brand-gold dark:hover:text-brand-gold focus:outline-none transition-colors duration-300 relative cursor-pointer"
+                className="p-2 text-brand-charcoal hover:text-brand-gold focus:outline-none transition-colors relative cursor-pointer"
                 aria-label="Open cart"
               >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -190,11 +149,9 @@ export default function Navbar() {
                   </span>
                 )}
               </button>
-
-              {/* Menu Toggle */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-brand-charcoal dark:text-brand-cream hover:text-brand-gold dark:hover:text-brand-gold focus:outline-none transition-colors duration-300"
+                className="p-2 text-brand-charcoal hover:text-brand-gold focus:outline-none transition-colors"
                 aria-label="Toggle menu"
               >
                 <svg
@@ -233,7 +190,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-brand-charcoal/45 dark:bg-black/60 md:hidden"
+            className="fixed inset-0 z-40 bg-brand-charcoal/45 md:hidden"
             onClick={() => setIsOpen(false)}
           >
             <motion.div
@@ -241,7 +198,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 bottom-0 w-4/5 max-w-sm bg-brand-cream dark:bg-[#1E1E1E] p-6 shadow-xl flex flex-col justify-between"
+              className="absolute right-0 top-0 bottom-0 w-4/5 max-w-sm bg-brand-cream p-6 shadow-xl flex flex-col justify-between"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="pt-20">
@@ -258,10 +215,10 @@ export default function Navbar() {
                         <Link
                           href={link.href}
                           className={cn(
-                            'text-xl font-display font-medium tracking-wide block py-2 border-b border-brand-charcoal/5 dark:border-brand-cream/5',
+                            'text-xl font-display font-medium tracking-wide block py-2 border-b border-brand-charcoal/5',
                             isActive
-                              ? 'text-brand-charcoal dark:text-brand-cream font-bold border-brand-charcoal/20 dark:border-brand-cream/20'
-                              : 'text-brand-charcoal/70 dark:text-brand-cream/70 hover:text-brand-charcoal dark:hover:text-brand-cream'
+                              ? 'text-brand-charcoal font-bold border-brand-charcoal/20'
+                              : 'text-brand-charcoal/70 hover:text-brand-charcoal'
                           )}
                         >
                           {link.label}
@@ -275,11 +232,11 @@ export default function Navbar() {
               <div className="space-y-4">
                 <Link
                   href="/catalog"
-                  className="w-full inline-flex items-center justify-center py-3 text-sm font-semibold uppercase tracking-widest bg-brand-charcoal dark:bg-brand-cream text-brand-cream dark:text-brand-charcoal hover:bg-brand-charcoal/90 dark:hover:bg-brand-cream/90 transition-all rounded-none text-center"
+                  className="w-full inline-flex items-center justify-center py-3 text-sm font-semibold uppercase tracking-widest bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 transition-all rounded-none text-center"
                 >
                   View Catalog
                 </Link>
-                <p className="text-[10px] text-center text-brand-charcoal/40 dark:text-brand-cream/40 uppercase tracking-widest font-medium">
+                <p className="text-[10px] text-center text-brand-charcoal/40 uppercase tracking-widest font-medium">
                   Auren — Premium Modest Wear
                 </p>
               </div>

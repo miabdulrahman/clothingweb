@@ -5,7 +5,6 @@ import Footer from '@/components/layout/Footer';
 import FloatingWhatsApp from '@/components/whatsapp/FloatingWhatsApp';
 import AnalyticsTracker from '@/components/layout/AnalyticsTracker';
 import { CartProvider } from '@/context/CartContext';
-import { ThemeProvider } from '@/context/ThemeContext';
 import CartDrawer from '@/components/cart/CartDrawer';
 import './globals.css';
 
@@ -44,39 +43,17 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} ${inter.variable} h-full antialiased scroll-smooth`}
     >
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const savedTheme = localStorage.getItem('theme');
-                  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                  const activeTheme = savedTheme || systemTheme;
-                  if (activeTheme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                  } else {
-                    document.documentElement.classList.remove('dark');
-                  }
-                } catch (e) {}
-              })()
-            `,
-          }}
-        />
-      </head>
-      <body className="min-h-full flex flex-col bg-brand-cream text-brand-charcoal dark:bg-[#121212] dark:text-brand-cream font-sans transition-colors duration-300">
-        <ThemeProvider>
-          <CartProvider>
-            <Navbar />
-            <main className="flex-grow pt-24 md:pt-28">
-              {children}
-            </main>
-            <Footer />
-            <CartDrawer />
-            <FloatingWhatsApp />
-            <AnalyticsTracker />
-          </CartProvider>
-        </ThemeProvider>
+      <body className="min-h-full flex flex-col bg-brand-cream text-brand-charcoal font-sans">
+        <CartProvider>
+          <Navbar />
+          <main className="flex-grow pt-24 md:pt-28">
+            {children}
+          </main>
+          <Footer />
+          <CartDrawer />
+          <FloatingWhatsApp />
+          <AnalyticsTracker />
+        </CartProvider>
       </body>
     </html>
   );

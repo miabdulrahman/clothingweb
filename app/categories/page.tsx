@@ -18,10 +18,10 @@ export default async function CategoriesPage() {
         <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-gold">
           Browse Collections
         </p>
-        <h1 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-wider text-brand-charcoal">
           Style Intentions
         </h1>
-        <p className="text-sm text-brand-charcoal/50 dark:text-brand-cream/50 font-light max-w-lg mx-auto leading-relaxed">
+        <p className="text-sm text-brand-charcoal/50 font-light max-w-lg mx-auto leading-relaxed">
           Explore clothing tailored to specific occasions and lifestyle fits, optimized for both structure and comfort.
         </p>
       </div>
@@ -32,10 +32,10 @@ export default async function CategoriesPage() {
           <StaggerChild key={category.id}>
             <Link
               href={`/catalog?category=${category.slug}`}
-              className="group flex flex-col space-y-4 border border-brand-charcoal/5 dark:border-white/10 p-4 bg-brand-cream dark:bg-[#1E1E1E] hover:border-brand-charcoal/20 dark:hover:border-white/30 transition-all duration-300"
+              className="group flex flex-col space-y-4 border border-brand-charcoal/5 p-4 bg-brand-cream hover:border-brand-charcoal/20 transition-all duration-300"
             >
               {/* Image box */}
-              <div className="relative aspect-[4/3] overflow-hidden bg-brand-beige/10 dark:bg-black/20">
+              <div className="relative aspect-[4/3] overflow-hidden bg-brand-beige/10">
                 <Image
                   src={category.image || 'https://placehold.co/600x450'}
                   alt={category.name}
@@ -48,13 +48,13 @@ export default async function CategoriesPage() {
 
               {/* Text */}
               <div className="space-y-1">
-                <h3 className="font-display text-base font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream group-hover:text-brand-gold dark:group-hover:text-brand-gold transition-colors">
+                <h3 className="font-display text-base font-bold uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">
                   {category.name}
                 </h3>
-                <p className="text-xs font-light text-brand-charcoal/60 dark:text-brand-cream/60 leading-relaxed min-h-[36px]">
+                <p className="text-xs font-light text-brand-charcoal/60 leading-relaxed min-h-[36px]">
                   {category.description}
                 </p>
-                <div className="pt-2 flex items-center text-[10px] uppercase font-semibold tracking-wider text-brand-charcoal dark:text-brand-cream">
+                <div className="pt-2 flex items-center text-[10px] uppercase font-semibold tracking-wider text-brand-charcoal">
                   <span>Explore products</span>
                   <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
                 </div>

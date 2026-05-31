@@ -95,16 +95,16 @@ export default function CatalogContent({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Top Banner / Header */}
       <div className="space-y-2">
-        <h1 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-wider text-brand-charcoal">
           The Catalog
         </h1>
-        <p className="text-sm text-brand-charcoal/50 dark:text-brand-cream/50 font-light max-w-lg">
+        <p className="text-sm text-brand-charcoal/50 font-light max-w-lg">
           Browse our entire selection of loose-fit tops, premium washed linen trousers, layered dusters, and minimalist kurtas.
         </p>
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center justify-between border-y border-brand-charcoal/10 dark:border-white/10 py-4">
+      <div className="flex items-center justify-between border-y border-brand-charcoal/10 py-4">
         {/* Mobile Filters Toggle */}
         <div className="md:hidden">
           <Button
@@ -118,7 +118,7 @@ export default function CatalogContent({
             </svg>
             <span>Filters</span>
             {filters.categories.length + filters.sizes.length + filters.colors.length > 0 && (
-              <span className="w-5 h-5 bg-brand-charcoal dark:bg-brand-cream text-brand-cream dark:text-brand-charcoal rounded-full flex items-center justify-center text-[10px] font-bold">
+              <span className="w-5 h-5 bg-brand-charcoal text-brand-cream rounded-full flex items-center justify-center text-[10px]">
                 {filters.categories.length + filters.sizes.length + filters.colors.length}
               </span>
             )}
@@ -126,7 +126,7 @@ export default function CatalogContent({
         </div>
 
         {/* Product Count (Desktop) */}
-        <div className="hidden md:block text-xs uppercase tracking-widest font-semibold text-brand-charcoal/55 dark:text-brand-cream/55">
+        <div className="hidden md:block text-xs uppercase tracking-widest font-semibold text-brand-charcoal/55">
           Showing {products.length} Products
         </div>
 
@@ -151,7 +151,7 @@ export default function CatalogContent({
           {isPending ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 opacity-60 transition-opacity">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="aspect-[3/4] bg-brand-charcoal/5 dark:bg-white/5 animate-pulse" />
+                <div key={i} className="aspect-[3/4] bg-brand-charcoal/5 animate-pulse" />
               ))}
             </div>
           ) : (
@@ -166,18 +166,18 @@ export default function CatalogContent({
           {/* Backdrop */}
           <div
             onClick={() => setIsMobileFiltersOpen(false)}
-            className="fixed inset-0 bg-brand-charcoal/45 dark:bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-brand-charcoal/45 backdrop-blur-sm"
           />
           {/* Drawer content */}
-          <div className="relative w-4/5 max-w-sm bg-brand-cream dark:bg-[#1E1E1E] h-full p-6 shadow-xl overflow-y-auto flex flex-col justify-between">
+          <div className="relative w-4/5 max-w-sm bg-brand-cream h-full p-6 shadow-xl overflow-y-auto flex flex-col justify-between">
             <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-brand-charcoal/10 dark:border-white/10 pb-4">
-                <h3 className="font-display text-lg font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream">
+              <div className="flex items-center justify-between border-b border-brand-charcoal/10 pb-4">
+                <h3 className="font-display text-lg font-bold uppercase tracking-wider text-brand-charcoal">
                   Filter & Sort
                 </h3>
                 <button
                   onClick={() => setIsMobileFiltersOpen(false)}
-                  className="text-brand-charcoal/50 dark:text-brand-cream/50 p-1"
+                  className="text-brand-charcoal/50 p-1"
                 >
                   <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
@@ -193,7 +193,7 @@ export default function CatalogContent({
               />
             </div>
 
-            <div className="pt-6 border-t border-brand-charcoal/10 dark:border-white/10 mt-6">
+            <div className="pt-6 border-t border-brand-charcoal/10 mt-6">
               <Button
                 variant="primary"
                 fullWidth

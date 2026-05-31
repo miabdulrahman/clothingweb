@@ -41,7 +41,7 @@ export default async function AdminDashboardLayout({
   }
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-brand-cream dark:bg-[#121212] text-brand-charcoal dark:text-brand-cream transition-colors duration-300">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-brand-cream text-brand-charcoal">
       <AdminSidebar userEmail={userEmail} />
       <main className="flex-1 p-4 sm:p-6 lg:p-10 overflow-y-auto w-full">
         <div className="max-w-7xl mx-auto">

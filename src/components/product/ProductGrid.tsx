@@ -9,9 +9,9 @@ interface ProductGridProps {
 export default function ProductGrid({ products }: ProductGridProps) {
   if (products.length === 0) {
     return (
-      <div className="text-center py-16 border border-dashed border-brand-charcoal/15 dark:border-white/10 bg-brand-cream dark:bg-[#1E1E1E] p-8 transition-colors duration-300">
+      <div className="text-center py-16 border border-dashed border-brand-charcoal/15 bg-brand-cream p-8">
         <svg
-          className="mx-auto h-12 w-12 text-brand-charcoal/30 dark:text-brand-cream/30 mb-4"
+          className="mx-auto h-12 w-12 text-brand-charcoal/30 mb-4"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -23,10 +23,10 @@ export default function ProductGrid({ products }: ProductGridProps) {
             d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
           />
         </svg>
-        <h3 className="font-display font-medium text-brand-charcoal dark:text-brand-cream text-base uppercase tracking-wider mb-1">
+        <h3 className="font-display font-medium text-brand-charcoal text-base uppercase tracking-wider mb-1">
           No Products Found
         </h3>
-        <p className="text-sm text-brand-charcoal/50 dark:text-brand-cream/50 font-light">
+        <p className="text-sm text-brand-charcoal/50 font-light">
           Try expanding your filters or search keywords.
         </p>
       </div>

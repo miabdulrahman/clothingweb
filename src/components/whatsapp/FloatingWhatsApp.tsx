@@ -32,7 +32,7 @@ export default function FloatingWhatsApp() {
         aria-label="Contact on WhatsApp"
       >
         {/* Tooltip */}
-        <span className="absolute right-16 scale-0 group-hover:scale-100 transition-all duration-200 origin-right bg-brand-charcoal dark:bg-brand-cream text-brand-cream dark:text-brand-charcoal text-xs font-semibold py-2 px-3 shadow-md whitespace-nowrap rounded-none uppercase tracking-widest">
+        <span className="absolute right-16 scale-0 group-hover:scale-100 transition-all duration-200 origin-right bg-brand-charcoal text-brand-cream text-xs font-semibold py-2 px-3 shadow-md whitespace-nowrap rounded-none uppercase tracking-widest">
           Order on WhatsApp
         </span>
 
