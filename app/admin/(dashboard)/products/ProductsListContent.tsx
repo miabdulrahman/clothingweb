@@ -186,99 +186,200 @@ export default function ProductsListContent({
             <p className="text-xs uppercase tracking-widest font-semibold">No products found</p>
             <p className="text-[10px] mt-1">Try modifying your search query or filters.</p>
           </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr className="border-b border-brand-charcoal/10 bg-brand-cream text-[10px] uppercase tracking-widest text-brand-charcoal/60 font-semibold">
-                  <th className="py-4 px-6 font-semibold">Product</th>
-                  <th className="py-4 px-4 font-semibold">Category</th>
-                  <th className="py-4 px-4 font-semibold">Price</th>
-                  <th className="py-4 px-4 font-semibold text-center">Featured</th>
-                  <th className="py-4 px-4 font-semibold text-center">In Stock</th>
-                  <th className="py-4 px-6 font-semibold text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-brand-charcoal/5 text-xs">
-                {filteredProducts.map((product) => (
-                  <tr key={product.id} className="hover:bg-brand-cream/20 transition-colors">
-                    {/* Item details */}
-                    <td className="py-4 px-6 flex items-center gap-4 min-w-[280px]">
-                      <div className="w-12 h-16 bg-brand-cream relative flex-shrink-0 border border-brand-charcoal/5">
-                        {product.images && product.images.length > 0 ? (
-                          <Image
-                            src={product.images[0]}
-                            alt={product.title}
-                            fill
-                            sizes="48px"
-                            className="object-cover"
-                            unoptimized={product.images[0].startsWith('http')}
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-[10px] text-brand-charcoal/30">
-                            N/A
-                          </div>
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <span className="font-semibold text-brand-charcoal uppercase tracking-wider block truncate">
-                          {product.title}
-                        </span>
-                        <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[9px] text-brand-charcoal/50 uppercase tracking-widest font-medium">
-                          {product.style_label && (
-                            <span className="text-brand-gold font-semibold">{product.style_label}</span>
+                ) : (
+          <>
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
+              <table className="w-full border-collapse text-left">
+                <thead>
+                  <tr className="border-b border-brand-charcoal/10 bg-brand-cream text-[10px] uppercase tracking-widest text-brand-charcoal/60 font-semibold">
+                    <th className="py-4 px-6 font-semibold">Product</th>
+                    <th className="py-4 px-4 font-semibold">Category</th>
+                    <th className="py-4 px-4 font-semibold">Price</th>
+                    <th className="py-4 px-4 font-semibold text-center">Featured</th>
+                    <th className="py-4 px-4 font-semibold text-center">In Stock</th>
+                    <th className="py-4 px-6 font-semibold text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-brand-charcoal/5 text-xs">
+                  {filteredProducts.map((product) => (
+                    <tr key={product.id} className="hover:bg-brand-cream/20 transition-colors">
+                      {/* Item details */}
+                      <td className="py-4 px-6 flex items-center gap-4 min-w-[280px]">
+                        <div className="w-12 h-16 bg-brand-cream relative flex-shrink-0 border border-brand-charcoal/5">
+                          {product.images && product.images.length > 0 ? (
+                            <Image
+                              src={product.images[0]}
+                              alt={product.title}
+                              fill
+                              sizes="48px"
+                              className="object-cover"
+                              unoptimized={product.images[0].startsWith('http')}
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-[10px] text-brand-charcoal/30">
+                              N/A
+                            </div>
                           )}
-                          <span>•</span>
-                          <span>{product.sizes.length} sizes</span>
-                          <span>•</span>
-                          <span>{product.colors.length} colors</span>
                         </div>
-                      </div>
-                    </td>
+                        <div className="min-w-0">
+                          <span className="font-semibold text-brand-charcoal uppercase tracking-wider block truncate">
+                            {product.title}
+                          </span>
+                          <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[9px] text-brand-charcoal/50 uppercase tracking-widest font-medium">
+                            {product.style_label && (
+                              <span className="text-brand-gold font-semibold">{product.style_label}</span>
+                            )}
+                            <span>•</span>
+                            <span>{product.sizes.length} sizes</span>
+                            <span>•</span>
+                            <span>{product.colors.length} colors</span>
+                          </div>
+                        </div>
+                      </td>
 
-                    {/* Category */}
-                    <td className="py-4 px-4 align-middle text-brand-charcoal/80 uppercase tracking-wider text-[10px] font-semibold">
-                      {product.category?.name || 'Unassigned'}
-                    </td>
+                      {/* Category */}
+                      <td className="py-4 px-4 align-middle text-brand-charcoal/80 uppercase tracking-wider text-[10px] font-semibold">
+                        {product.category?.name || 'Unassigned'}
+                      </td>
 
-                    {/* Price */}
-                    <td className="py-4 px-4 align-middle font-medium text-brand-charcoal/80">
-                      {formatPrice(product.price, product.currency)}
-                    </td>
+                      {/* Price */}
+                      <td className="py-4 px-4 align-middle font-medium text-brand-charcoal/80">
+                        {formatPrice(product.price, product.currency)}
+                      </td>
 
-                    {/* Featured toggle */}
-                    <td className="py-4 px-4 align-middle text-center">
+                      {/* Featured toggle */}
+                      <td className="py-4 px-4 align-middle text-center">
+                        <button
+                          onClick={() => handleToggleFeatured(product)}
+                          className={`inline-flex items-center justify-center p-1 border rounded-none cursor-pointer transition-colors duration-300 ${
+                            product.featured
+                              ? 'bg-brand-gold text-brand-cream border-brand-gold'
+                              : 'bg-transparent text-brand-charcoal/30 border-brand-charcoal/10 hover:border-brand-gold'
+                          }`}
+                          aria-label="Toggle featured"
+                        >
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        </button>
+                      </td>
+
+                      {/* In Stock toggle */}
+                      <td className="py-4 px-4 align-middle text-center">
+                        <button
+                          onClick={() => handleToggleStock(product)}
+                          className={`inline-flex px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold cursor-pointer border transition-colors duration-300 ${
+                            product.in_stock
+                              ? 'bg-[#25D366]/10 text-[#20ba5a] border-[#25D366]/20 hover:bg-[#25D366]/20'
+                              : 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100'
+                          }`}
+                        >
+                          {product.in_stock ? 'In Stock' : 'Out of Stock'}
+                        </button>
+                      </td>
+
+                      {/* Actions */}
+                      <td className="py-4 px-6 align-middle text-right space-x-3">
+                        <Link
+                          href={`/admin/products/${product.id}`}
+                          className="text-[10px] uppercase tracking-widest text-brand-gold hover:text-brand-charcoal transition-colors font-semibold"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={() => setProductToDelete(product)}
+                          className="text-[10px] uppercase tracking-widest text-red-500 hover:text-red-700 transition-colors font-semibold cursor-pointer"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Card List View */}
+            <div className="md:hidden divide-y divide-brand-charcoal/10">
+              {filteredProducts.map((product) => (
+                <div key={product.id} className="p-4 space-y-4 hover:bg-brand-cream/10 transition-colors">
+                  <div className="flex gap-4">
+                    {/* Image */}
+                    <div className="w-14 h-20 bg-brand-cream relative flex-shrink-0 border border-brand-charcoal/5">
+                      {product.images && product.images.length > 0 ? (
+                        <Image
+                          src={product.images[0]}
+                          alt={product.title}
+                          fill
+                          sizes="56px"
+                          className="object-cover"
+                          unoptimized={product.images[0].startsWith('http')}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-[9px] text-brand-charcoal/30">
+                          N/A
+                        </div>
+                      )}
+                    </div>
+                    {/* Details */}
+                    <div className="min-w-0 flex-1 space-y-1">
+                      <span className="font-semibold text-brand-charcoal uppercase tracking-wider text-xs block truncate">
+                        {product.title}
+                      </span>
+                      <p className="text-[10px] text-brand-charcoal/80 font-medium uppercase tracking-wider">
+                        {product.category?.name || 'Unassigned'}
+                      </p>
+                      <p className="text-xs font-bold text-brand-charcoal/90">
+                        {formatPrice(product.price, product.currency)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Attributes details */}
+                  <div className="flex flex-wrap gap-2 text-[9px] text-brand-charcoal/50 uppercase tracking-widest font-semibold">
+                    {product.style_label && (
+                      <span className="text-brand-gold">{product.style_label}</span>
+                    )}
+                    <span>•</span>
+                    <span>{product.sizes.length} sizes</span>
+                    <span>•</span>
+                    <span>{product.colors.length} colors</span>
+                  </div>
+
+                  {/* Quick Toggles & Actions */}
+                  <div className="flex items-center justify-between gap-4 pt-3 border-t border-brand-charcoal/5">
+                    <div className="flex items-center gap-2">
+                      {/* Featured button */}
                       <button
                         onClick={() => handleToggleFeatured(product)}
-                        className={`inline-flex items-center justify-center p-1 border rounded-none cursor-pointer transition-colors duration-300 ${
+                        className={`inline-flex items-center gap-1.5 px-2 py-1 text-[9px] uppercase tracking-widest font-semibold border transition-all duration-300 ${
                           product.featured
                             ? 'bg-brand-gold text-brand-cream border-brand-gold'
-                            : 'bg-transparent text-brand-charcoal/30 border-brand-charcoal/10 hover:border-brand-gold'
+                            : 'bg-transparent text-brand-charcoal/40 border-brand-charcoal/10 hover:border-brand-gold'
                         }`}
-                        aria-label="Toggle featured"
                       >
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
+                        {product.featured ? 'Featured' : 'Feature'}
                       </button>
-                    </td>
 
-                    {/* In Stock toggle */}
-                    <td className="py-4 px-4 align-middle text-center">
+                      {/* Stock button */}
                       <button
                         onClick={() => handleToggleStock(product)}
-                        className={`inline-flex px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold cursor-pointer border transition-colors duration-300 ${
+                        className={`inline-flex px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold border transition-colors duration-300 ${
                           product.in_stock
-                            ? 'bg-[#25D366]/10 text-[#20ba5a] border-[#25D366]/20 hover:bg-[#25D366]/20'
-                            : 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100'
+                            ? 'bg-[#25D366]/10 text-[#20ba5a] border-[#25D366]/20'
+                            : 'bg-red-50 text-red-600 border-red-100'
                         }`}
                       >
                         {product.in_stock ? 'In Stock' : 'Out of Stock'}
                       </button>
-                    </td>
+                    </div>
 
-                    {/* Actions */}
-                    <td className="py-4 px-6 align-middle text-right space-x-3">
+                    {/* Action links */}
+                    <div className="flex gap-3">
                       <Link
                         href={`/admin/products/${product.id}`}
                         className="text-[10px] uppercase tracking-widest text-brand-gold hover:text-brand-charcoal transition-colors font-semibold"
@@ -291,12 +392,12 @@ export default function ProductsListContent({
                       >
                         Delete
                       </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
       </div>
 

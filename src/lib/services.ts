@@ -404,14 +404,108 @@ export async function getAdminStats(): Promise<{
     const { count: whatsappClicks } = await supabase.from('analytics_events').select('*', { count: 'exact', head: true }).eq('event_type', 'whatsapp_click');
     const { count: totalPageViews } = await supabase.from('analytics_events').select('*', { count: 'exact', head: true }).eq('event_type', 'page_view');
 
+    // 1. Calculate viewsOverTime dynamically from Supabase
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    
+    const { data: events, error: eventsError } = await supabase
+      .from('analytics_events')
+      .select('event_type, created_at')
+      .gte('created_at', sevenDaysAgo.toISOString());
+
+    const dateMap = new Map<string, { dateLabel: string; views: number; clicks: number }>();
+    
+    // Initialize map with last 7 days so days with 0 metrics are still shown
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); // e.g. "May 15"
+      const keyStr = d.toISOString().split('T')[0]; // e.g. "2026-05-15"
+      dateMap.set(keyStr, { dateLabel: dateStr, views: 0, clicks: 0 });
+    }
+    
+    if (events && !eventsError) {
+      events.forEach(evt => {
+        if (!evt.created_at) return;
+        const dateKey = evt.created_at.split('T')[0];
+        if (dateMap.has(dateKey)) {
+          const statsVal = dateMap.get(dateKey)!;
+          if (evt.event_type === 'page_view') {
+            statsVal.views++;
+          } else if (evt.event_type === 'whatsapp_click') {
+            statsVal.clicks++;
+          }
+        }
+      });
+    }
+    
+    const viewsOverTime = Array.from(dateMap.values()).map(val => ({
+      date: val.dateLabel,
+      views: val.views,
+      clicks: val.clicks
+    }));
+
+    // 2. Calculate topProducts dynamically from Supabase
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    
+    const { data: prodEvents, error: prodEventsError } = await supabase
+      .from('analytics_events')
+      .select('event_type, event_data')
+      .in('event_type', ['product_view', 'whatsapp_click'])
+      .gte('created_at', thirtyDaysAgo.toISOString());
+
+    const productStatsMap = new Map<string, { title: string; views: number; whatsappClicks: number }>();
+    
+    if (prodEvents && !prodEventsError) {
+      prodEvents.forEach(evt => {
+        const data = evt.event_data as Record<string, any> | null;
+        if (!data || !data.product_title) return;
+        
+        const title = data.product_title;
+        const productId = data.product_id || title;
+        
+        if (!productStatsMap.has(productId)) {
+          productStatsMap.set(productId, { title, views: 0, whatsappClicks: 0 });
+        }
+        
+        const statsVal = productStatsMap.get(productId)!;
+        if (evt.event_type === 'product_view') {
+          statsVal.views++;
+        } else if (evt.event_type === 'whatsapp_click') {
+          statsVal.whatsappClicks++;
+        }
+      });
+    }
+    
+    const topProducts = Array.from(productStatsMap.values())
+      .sort((a, b) => b.whatsappClicks - a.whatsappClicks || b.views - a.views)
+      .slice(0, 5);
+
+    // Fallback/padding to display at least some products in the stats dashboard if there are no events yet
+    if (topProducts.length < 3) {
+      const { data: dbProducts } = await supabase
+        .from('products')
+        .select('title')
+        .limit(5);
+        
+      if (dbProducts) {
+        dbProducts.forEach(p => {
+          if (topProducts.length < 5 && !topProducts.some(tp => tp.title === p.title)) {
+            topProducts.push({ title: p.title, views: 0, whatsappClicks: 0 });
+          }
+        });
+      }
+    }
+
     return {
-      totalProducts: prodCount || defaultStats.totalProducts,
-      inStockCount: inStockCount || defaultStats.inStockCount,
-      outOfStockCount: outStockCount || defaultStats.outOfStockCount,
-      whatsappClicks: whatsappClicks || defaultStats.whatsappClicks,
-      totalPageViews: totalPageViews || defaultStats.totalPageViews,
-      topProducts: defaultStats.topProducts, // Simplified mock for MVP charts
-      viewsOverTime: defaultStats.viewsOverTime // Simplified mock for MVP charts
+      totalProducts: prodCount !== null ? prodCount : defaultStats.totalProducts,
+      inStockCount: inStockCount !== null ? inStockCount : defaultStats.inStockCount,
+      outOfStockCount: outStockCount !== null ? outStockCount : defaultStats.outOfStockCount,
+      whatsappClicks: whatsappClicks !== null ? whatsappClicks : defaultStats.whatsappClicks,
+      totalPageViews: totalPageViews !== null ? totalPageViews : defaultStats.totalPageViews,
+      topProducts: topProducts.length > 0 ? topProducts : defaultStats.topProducts,
+      viewsOverTime: viewsOverTime
     };
   } catch (err) {
     console.error('Error fetching admin stats:', err);

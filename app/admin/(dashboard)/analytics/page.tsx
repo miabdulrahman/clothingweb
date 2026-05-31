@@ -49,7 +49,7 @@ export default async function AdminAnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Funnel Card */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 flex flex-col justify-between">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 flex flex-col justify-between">
           <div>
             <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal mb-6 border-b border-brand-charcoal/5 pb-3">
               Order Conversion Funnel
@@ -87,29 +87,29 @@ export default async function AdminAnalyticsPage() {
         </div>
 
         {/* Traffic Chart Card */}
-        <div className="bg-white border border-brand-charcoal/10 p-6">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6">
           <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal mb-6 border-b border-brand-charcoal/5 pb-3">
             Traffic Trends Over Time
           </h2>
           
-          <div className="h-64 flex items-end gap-3 pt-4 border-b border-brand-charcoal/10">
+          <div className="h-64 flex items-end gap-1.5 sm:gap-3 pt-4 border-b border-brand-charcoal/10">
             {stats.viewsOverTime.map((item, idx) => {
               const maxViews = Math.max(...stats.viewsOverTime.map(d => d.views), 1);
               const viewPercentage = (item.views / maxViews) * 100;
               
               return (
                 <div key={idx} className="flex-1 flex flex-col items-center h-full group relative">
-                  <div className="absolute -top-8 scale-0 group-hover:scale-100 transition-transform bg-brand-charcoal text-brand-cream text-[9px] uppercase tracking-widest py-1 px-2 z-10 whitespace-nowrap shadow-lg">
+                  <div className="absolute -top-8 scale-0 group-hover:scale-100 transition-all duration-200 bg-brand-charcoal text-brand-cream text-[9px] uppercase tracking-widest py-1 px-2 z-10 whitespace-nowrap shadow-lg">
                     {item.views} Views
                   </div>
                   <div 
                     style={{ height: `${viewPercentage}%` }} 
-                    className="w-full bg-brand-beige/30 group-hover:bg-brand-gold transition-colors duration-300 relative"
+                    className="w-full bg-brand-beige/30 group-hover:bg-brand-gold transition-colors duration-300 relative rounded-t-sm"
                   >
                     {/* Small inner bar for clicks */}
                     <div 
                       style={{ height: `${(item.clicks / item.views) * 100}%` }}
-                      className="absolute bottom-0 left-0 right-0 bg-brand-charcoal group-hover:bg-[#20ba5a]"
+                      className="absolute bottom-0 left-0 right-0 bg-brand-charcoal group-hover:bg-[#20ba5a] rounded-t-sm"
                     />
                   </div>
                   <span className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 mt-2 font-semibold">
@@ -137,7 +137,7 @@ export default async function AdminAnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* High Conversion Products */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 lg:col-span-2">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 lg:col-span-2">
           <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal mb-6 border-b border-brand-charcoal/5 pb-3">
             Inquiry Interest by Product
           </h2>
@@ -172,7 +172,7 @@ export default async function AdminAnalyticsPage() {
         </div>
 
         {/* Inventory Out of Stock Items */}
-        <div className="bg-white border border-brand-charcoal/10 p-6">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6">
           <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal mb-6 border-b border-brand-charcoal/5 pb-3">
             Low Stock Alerts
           </h2>

@@ -42,9 +42,9 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {/* Card 1: Total Products */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 relative">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 relative hover:-translate-y-1 hover:shadow-md transition-all duration-300">
           <div className="absolute top-0 left-0 w-1 h-full bg-brand-beige" />
           <p className="text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">
             Total Inventory
@@ -59,7 +59,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Card 2: WhatsApp Clicks */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 relative">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 relative hover:-translate-y-1 hover:shadow-md transition-all duration-300">
           <div className="absolute top-0 left-0 w-1 h-full bg-[#25D366]" />
           <p className="text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">
             WhatsApp Leads
@@ -73,7 +73,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Card 3: Total Page Views */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 relative">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 relative hover:-translate-y-1 hover:shadow-md transition-all duration-300">
           <div className="absolute top-0 left-0 w-1 h-full bg-brand-gold" />
           <p className="text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">
             Total Traffic
@@ -87,7 +87,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Card 4: Conversion Rate */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 relative">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 relative hover:-translate-y-1 hover:shadow-md transition-all duration-300">
           <div className="absolute top-0 left-0 w-1 h-full bg-brand-charcoal" />
           <p className="text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">
             Conversion Rate
@@ -105,13 +105,13 @@ export default async function AdminDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Chart Column */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 lg:col-span-2">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 lg:col-span-2">
           <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal mb-6">
             Traffic vs WhatsApp Leads (Last 7 Days)
           </h2>
           
           {/* Simple Premium CSS Bar Chart */}
-          <div className="h-64 flex items-end gap-3 pt-4 border-b border-brand-charcoal/10">
+          <div className="h-64 flex items-end gap-1.5 sm:gap-3 pt-4 border-b border-brand-charcoal/10">
             {stats.viewsOverTime.map((item, idx) => {
               const maxViews = Math.max(...stats.viewsOverTime.map(d => d.views), 1);
               const viewPercentage = (item.views / maxViews) * 100;
@@ -120,7 +120,7 @@ export default async function AdminDashboardPage() {
               return (
                 <div key={idx} className="flex-1 flex flex-col items-center h-full group relative">
                   {/* Tooltip */}
-                  <div className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform bg-brand-charcoal text-brand-cream text-[9px] uppercase tracking-widest py-1.5 px-3 z-10 whitespace-nowrap shadow-lg">
+                  <div className="absolute -top-10 scale-0 group-hover:scale-100 transition-all duration-200 bg-brand-charcoal/90 backdrop-blur-md text-brand-cream text-[9px] uppercase tracking-widest py-1.5 px-3 z-10 whitespace-nowrap shadow-lg border border-brand-cream/10 rounded-sm">
                     {item.views} Views | {item.clicks} Clicks
                   </div>
                   
@@ -129,12 +129,12 @@ export default async function AdminDashboardPage() {
                     {/* Traffic Bar */}
                     <div 
                       style={{ height: `${viewPercentage}%` }} 
-                      className="w-4 bg-brand-beige/50 group-hover:bg-brand-gold transition-colors duration-300"
+                      className="w-3 sm:w-4 bg-brand-beige/50 group-hover:bg-brand-gold rounded-t-sm transition-all duration-300 hover:scale-y-[1.02] origin-bottom"
                     />
                     {/* WhatsApp Lead Bar */}
                     <div 
                       style={{ height: `${Math.min(clickPercentage, 100)}%` }} 
-                      className="w-4 bg-brand-charcoal group-hover:bg-[#20ba5a] transition-colors duration-300"
+                      className="w-3 sm:w-4 bg-brand-charcoal group-hover:bg-[#20ba5a] rounded-t-sm transition-all duration-300 hover:scale-y-[1.02] origin-bottom"
                     />
                   </div>
                   
@@ -160,7 +160,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Top Products sidebar */}
-        <div className="bg-white border border-brand-charcoal/10 p-6 flex flex-col">
+        <div className="bg-white border border-brand-charcoal/10 p-4 sm:p-6 flex flex-col">
           <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal mb-6">
             Top Performing Products
           </h2>

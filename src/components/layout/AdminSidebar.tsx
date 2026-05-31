@@ -83,14 +83,14 @@ export default function AdminSidebar({ userEmail }: { userEmail: string }) {
       {/* Backdrop for Mobile */}
       {mobileOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-brand-charcoal/30 backdrop-blur-sm z-30 transition-opacity"
+          className="lg:hidden fixed inset-0 bg-brand-charcoal/30 backdrop-blur-sm z-40 transition-opacity"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-35 w-64 bg-brand-charcoal text-brand-cream border-r border-brand-charcoal/20 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-64 bg-brand-charcoal text-brand-cream border-r border-brand-charcoal/20 flex flex-col justify-between transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
