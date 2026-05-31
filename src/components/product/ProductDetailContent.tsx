@@ -11,9 +11,10 @@ import Badge from '@/components/ui/Badge';
 import Modal from '@/components/ui/Modal';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import ProductGallery from '@/components/product/ProductGallery';
 import ProductCard from '@/components/product/ProductCard';
-import { SlideUp, StaggerContainer, StaggerChild } from '@/components/motion/Transitions';
+import { SlideUp, StaggerContainer, StaggerChild, FadeIn } from '@/components/motion/Transitions';
 import { logAnalyticsEventAction as logAnalyticsEvent } from '@/lib/actions';
 
 interface ProductDetailContentProps {
@@ -74,7 +75,7 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
     if (!selectedSize || !selectedColor) return;
     setIsAdding(true);
     addToCart(product, selectedSize, selectedColor, quantity);
-    setTimeout(() => setIsAdding(false), 1000);
+    setTimeout(() => setIsAdding(false), 1200);
 
     logAnalyticsEvent('whatsapp_click', {
       product_id: product.id,
@@ -138,31 +139,31 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
       {/* Product Details Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
         {/* Left: Gallery */}
-        <div>
+        <FadeIn>
           <ProductGallery images={product.images} />
-        </div>
+        </FadeIn>
 
         {/* Right: Info */}
         <div className="space-y-6 md:sticky md:top-32">
           {/* Breadcrumbs */}
-          <div className="flex items-center space-x-2 text-[10px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">
-            <Link href="/" className="hover:text-brand-charcoal transition-colors">Home</Link>
+          <SlideUp delay={0.1} className="flex items-center space-x-2 text-[10px] uppercase tracking-widest text-brand-charcoal/50 dark:text-dark-muted font-semibold">
+            <Link href="/" className="hover:text-brand-charcoal dark:hover:text-dark-text transition-colors duration-300">Home</Link>
             <span>/</span>
-            <Link href="/catalog" className="hover:text-brand-charcoal transition-colors">Catalog</Link>
+            <Link href="/catalog" className="hover:text-brand-charcoal dark:hover:text-dark-text transition-colors duration-300">Catalog</Link>
             {product.category && (
               <>
                 <span>/</span>
-                <Link href={`/catalog?category=${product.category.slug}`} className="hover:text-brand-charcoal transition-colors">
+                <Link href={`/catalog?category=${product.category.slug}`} className="hover:text-brand-charcoal dark:hover:text-dark-text transition-colors duration-300">
                   {product.category.name}
                 </Link>
               </>
             )}
-          </div>
+          </SlideUp>
 
           {/* Title and Style Label */}
-          <div className="space-y-2">
+          <SlideUp delay={0.2} className="space-y-2">
             <div className="flex items-baseline justify-between gap-4">
-              <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-wider text-brand-charcoal leading-snug">
+              <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text leading-snug">
                 {product.title}
               </h1>
               {product.style_label && (
@@ -171,15 +172,15 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
                 </Badge>
               )}
             </div>
-            <p className="text-xl font-bold tracking-wider text-brand-charcoal">
+            <p className="text-xl font-bold tracking-wider text-brand-charcoal dark:text-dark-text">
               {formattedPrice}
             </p>
-          </div>
+          </SlideUp>
 
-          <hr className="border-brand-charcoal/10" />
+          <hr className="border-brand-charcoal/10 dark:border-dark-border" />
 
           {/* Description */}
-          <p className="text-sm font-light text-brand-charcoal/70 leading-relaxed">
+          <p className="text-sm font-light text-brand-charcoal/70 dark:text-dark-muted leading-relaxed">
             {product.description}
           </p>
 
@@ -214,13 +215,23 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
                   <button
                     onClick={handleAddToCart}
                     disabled={isAdding}
-                    className="w-full inline-flex items-center justify-center py-4 bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 transition-colors rounded-none font-semibold uppercase tracking-widest text-xs shadow-sm cursor-pointer disabled:opacity-85"
+                    className="w-full inline-flex items-center justify-center py-4 bg-brand-charcoal dark:bg-dark-gold text-brand-cream dark:text-dark-bg hover:bg-brand-charcoal/90 dark:hover:bg-dark-gold/85 transition-all duration-300 rounded-none font-semibold uppercase tracking-widest text-xs shadow-sm cursor-pointer disabled:opacity-85"
                   >
-                    {isAdding ? 'Added to Bag' : 'Add to Bag'}
+                    <AnimatePresence mode="wait">
+                      <motion.span
+                        key={isAdding ? 'added' : 'add'}
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {isAdding ? '✓ Added to Bag' : 'Add to Bag'}
+                      </motion.span>
+                    </AnimatePresence>
                   </button>
                   <button
                     onClick={handleBuyNow}
-                    className="w-full inline-flex items-center justify-center py-4 bg-[#25D366] text-white hover:bg-[#20ba5a] transition-colors rounded-none font-semibold uppercase tracking-widest text-xs shadow-md cursor-pointer"
+                    className="w-full inline-flex items-center justify-center py-4 bg-[#25D366] text-white hover:bg-[#20ba5a] hover:shadow-[0_0_20px_rgba(37,211,102,0.2)] transition-all duration-300 rounded-none font-semibold uppercase tracking-widest text-xs shadow-md cursor-pointer"
                   >
                     <svg className="w-4 h-4 mr-2 fill-current" viewBox="0 0 24 24">
                       <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.497 1.45 5.416 1.451 5.458 0 9.897-4.437 9.902-9.899.002-2.646-1.02-5.133-2.88-6.996C17.228 1.856 14.743.834 12.09.833 6.63.833 2.19 5.27 2.185 10.733c-.001 1.927.501 3.811 1.457 5.418L2.73 22.179l6.082-1.593c1.558.85 3.325 1.298 5.12 1.299h.005zm10.72-7.516c-.292-.146-1.728-.853-1.996-.952-.266-.098-.46-.147-.654.146-.195.293-.755.952-.924 1.147-.17.195-.339.219-.63.073-.292-.147-1.233-.454-2.35-1.45-1.01-.898-1.532-1.109-1.824-1.255-.292-.147-.46-.073-.606.073-.146.147-.631.733-.797.92-.167.188-.334.219-.626.072-.29-.145-1.23-.453-2.345-1.448-.868-.774-1.455-1.73-1.625-2.022-.17-.293-.018-.452.129-.597.13-.13.292-.341.437-.512.146-.17.195-.293.293-.488.098-.195.048-.366-.024-.513-.073-.146-.654-1.579-.896-2.164-.236-.569-.475-.491-.654-.5l-.56-.008c-.193 0-.507.073-.773.366-.266.292-1.015.992-1.015 2.42 0 1.427 1.039 2.808 1.185 3.003.146.195 2.045 3.123 4.954 4.38.692.3 1.233.479 1.654.613.696.222 1.33.191 1.83.116.559-.083 1.729-.707 1.972-1.39.244-.683.244-1.268.17-1.39-.073-.122-.268-.195-.56-.341z" />
@@ -228,7 +239,7 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
                     <span>WhatsApp Buy</span>
                   </button>
                 </div>
-                <div className="flex items-center justify-center space-x-2 text-[10px] font-semibold text-brand-charcoal/50 uppercase tracking-wider">
+                <div className="flex items-center justify-center space-x-2 text-[10px] font-semibold text-brand-charcoal/50 dark:text-dark-muted uppercase tracking-wider">
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                   </svg>
@@ -241,75 +252,123 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
               <Button disabled fullWidth className="py-4">
                 Sold Out
               </Button>
-              <p className="text-xs text-brand-charcoal/50 italic text-center font-light">
+              <p className="text-xs text-brand-charcoal/50 dark:text-dark-muted italic text-center font-light">
                 This item is currently out of stock. Contact us on WhatsApp to inquire about restock times.
               </p>
             </div>
           )}
 
-          <hr className="border-brand-charcoal/10" />
+          <hr className="border-brand-charcoal/10 dark:border-dark-border" />
 
           {/* Product Details Accordion */}
           <div className="space-y-2 select-none">
             {/* Details Section */}
-            <div className="border-b border-brand-charcoal/10 pb-2">
+            <div className="border-b border-brand-charcoal/10 dark:border-dark-border pb-2">
               <button
                 onClick={() => toggleAccordion('details')}
-                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal focus:outline-none"
+                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text focus:outline-none cursor-pointer"
               >
                 <span>Product details</span>
-                <span className="text-base">{activeAccordion === 'details' ? '−' : '+'}</span>
+                <motion.span
+                  className="text-base"
+                  animate={{ rotate: activeAccordion === 'details' ? 45 : 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  +
+                </motion.span>
               </button>
-              {activeAccordion === 'details' && (
-                <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 space-y-2 leading-relaxed">
-                  <p>{product.full_description || product.description}</p>
-                  {product.fabric && (
-                    <p>
-                      <span className="font-semibold text-brand-charcoal">Fabric:</span> {product.fabric}
-                    </p>
-                  )}
-                  {product.care && (
-                    <p>
-                      <span className="font-semibold text-brand-charcoal">Care:</span> {product.care}
-                    </p>
-                  )}
-                </div>
-              )}
+              <AnimatePresence initial={false}>
+                {activeAccordion === 'details' && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 dark:text-dark-muted space-y-2 leading-relaxed">
+                      <p>{product.full_description || product.description}</p>
+                      {product.fabric && (
+                        <p>
+                          <span className="font-semibold text-brand-charcoal dark:text-dark-text">Fabric:</span> {product.fabric}
+                        </p>
+                      )}
+                      {product.care && (
+                        <p>
+                          <span className="font-semibold text-brand-charcoal dark:text-dark-text">Care:</span> {product.care}
+                        </p>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Fit Notes Section */}
             {product.fit_notes && (
-              <div className="border-b border-brand-charcoal/10 pb-2">
+              <div className="border-b border-brand-charcoal/10 dark:border-dark-border pb-2">
                 <button
                   onClick={() => toggleAccordion('fit')}
-                  className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal focus:outline-none"
+                  className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text focus:outline-none cursor-pointer"
                 >
                   <span>Size & fit notes</span>
-                  <span className="text-base">{activeAccordion === 'fit' ? '−' : '+'}</span>
+                  <motion.span
+                    className="text-base"
+                    animate={{ rotate: activeAccordion === 'fit' ? 45 : 0 }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    +
+                  </motion.span>
                 </button>
-                {activeAccordion === 'fit' && (
-                  <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 leading-relaxed">
-                    <p>{product.fit_notes}</p>
-                  </div>
-                )}
+                <AnimatePresence initial={false}>
+                  {activeAccordion === 'fit' && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 dark:text-dark-muted leading-relaxed">
+                        <p>{product.fit_notes}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             )}
 
             {/* Delivery Section */}
-            <div className="border-b border-brand-charcoal/10 pb-2">
+            <div className="border-b border-brand-charcoal/10 dark:border-dark-border pb-2">
               <button
                 onClick={() => toggleAccordion('delivery')}
-                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal focus:outline-none"
+                className="w-full flex items-center justify-between text-left py-2 font-display text-xs font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text focus:outline-none cursor-pointer"
               >
                 <span>Delivery & exchanges</span>
-                <span className="text-base">{activeAccordion === 'delivery' ? '−' : '+'}</span>
+                <motion.span
+                  className="text-base"
+                  animate={{ rotate: activeAccordion === 'delivery' ? 45 : 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  +
+                </motion.span>
               </button>
-              {activeAccordion === 'delivery' && (
-                <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 space-y-2 leading-relaxed">
-                  <p>Standard Delivery: 2-5 business days islandwide in Sri Lanka.</p>
-                  <p>Exchange Policy: We offer size exchanges within 7 days of delivery, provided tags are attached and the garment is in original condition.</p>
-                </div>
-              )}
+              <AnimatePresence initial={false}>
+                {activeAccordion === 'delivery' && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pt-2 pb-4 text-xs font-light text-brand-charcoal/70 dark:text-dark-muted space-y-2 leading-relaxed">
+                      <p>Standard Delivery: 2-5 business days islandwide in Sri Lanka.</p>
+                      <p>Exchange Policy: We offer size exchanges within 7 days of delivery, provided tags are attached and the garment is in original condition.</p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -317,39 +376,41 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
 
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (
-        <div className="space-y-8 pt-10 border-t border-brand-charcoal/10">
+        <div className="space-y-8 pt-10 border-t border-brand-charcoal/10 dark:border-dark-border">
           <div className="space-y-1">
-            <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-gold">Complete the look</p>
-            <h2 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wider text-brand-charcoal">
+            <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-gold dark:text-dark-gold">Complete the look</p>
+            <h2 className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text">
               Related Pieces
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {relatedProducts.map((prod) => (
-              <ProductCard key={prod.id} product={prod} />
+              <StaggerChild key={prod.id}>
+                <ProductCard product={prod} />
+              </StaggerChild>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       )}
 
       {/* Sticky Bottom CTA (Mobile Only) */}
       {product.in_stock && (
-        <div className="fixed bottom-0 left-0 right-0 z-30 bg-brand-cream border-t border-brand-charcoal/10 p-3 flex items-center justify-between gap-4 md:hidden shadow-lg select-none">
+        <div className="fixed bottom-0 left-0 right-0 z-30 bg-brand-cream dark:bg-dark-surface border-t border-brand-charcoal/10 dark:border-dark-border p-3 flex items-center justify-between gap-4 md:hidden shadow-lg dark:shadow-black/30 select-none transition-theme">
           <div className="flex-shrink-0">
-            <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 font-semibold">Price</p>
-            <p className="text-sm font-bold tracking-wider text-brand-charcoal leading-none">{formattedPrice}</p>
+            <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 dark:text-dark-muted font-semibold">Price</p>
+            <p className="text-sm font-bold tracking-wider text-brand-charcoal dark:text-dark-text leading-none">{formattedPrice}</p>
           </div>
           <div className="flex-grow grid grid-cols-2 gap-2">
             <button
               onClick={handleAddToCart}
               disabled={isAdding}
-              className="inline-flex items-center justify-center py-3 bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 transition-colors rounded-none font-semibold uppercase tracking-widest text-[10px] cursor-pointer disabled:opacity-80"
+              className="inline-flex items-center justify-center py-3 bg-brand-charcoal dark:bg-dark-gold text-brand-cream dark:text-dark-bg hover:bg-brand-charcoal/90 dark:hover:bg-dark-gold/85 transition-all duration-300 rounded-none font-semibold uppercase tracking-widest text-[10px] cursor-pointer disabled:opacity-80"
             >
-              {isAdding ? 'Added' : 'Add Bag'}
+              {isAdding ? '✓ Added' : 'Add Bag'}
             </button>
             <button
               onClick={handleBuyNow}
-              className="inline-flex items-center justify-center py-3 bg-[#25D366] text-white hover:bg-[#20ba5a] transition-colors rounded-none font-semibold uppercase tracking-widest text-[10px] cursor-pointer"
+              className="inline-flex items-center justify-center py-3 bg-[#25D366] text-white hover:bg-[#20ba5a] transition-all duration-300 rounded-none font-semibold uppercase tracking-widest text-[10px] cursor-pointer"
             >
               Buy Now
             </button>
@@ -360,40 +421,40 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
       {/* Size Guide Modal */}
       <Modal isOpen={isSizeGuideOpen} onClose={() => setIsSizeGuideOpen(false)} title="Size Guide">
         <div className="space-y-6">
-          <p className="text-xs font-light text-brand-charcoal/70 leading-relaxed">
+          <p className="text-xs font-light text-brand-charcoal/70 dark:text-dark-muted leading-relaxed">
             Our items are custom engineered for a loose, relaxed fit. Choose your standard size for an oversized look, or size down for a more structured fit.
           </p>
-          <div className="overflow-x-auto border border-brand-charcoal/10">
+          <div className="overflow-x-auto border border-brand-charcoal/10 dark:border-dark-border">
             <table className="w-full text-xs text-left border-collapse">
               <thead>
-                <tr className="bg-brand-charcoal/5 border-b border-brand-charcoal/10">
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Size</th>
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Chest (in)</th>
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Length (in)</th>
-                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px]">Sleeve (in)</th>
+                <tr className="bg-brand-charcoal/5 dark:bg-dark-card border-b border-brand-charcoal/10 dark:border-dark-border">
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-dark-text">Size</th>
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-dark-text">Chest (in)</th>
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-dark-text">Length (in)</th>
+                  <th className="p-3 font-semibold uppercase tracking-wider text-[10px] text-brand-charcoal dark:text-dark-text">Sleeve (in)</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-brand-charcoal/10 font-light">
+              <tbody className="divide-y divide-brand-charcoal/10 dark:divide-dark-border font-light text-brand-charcoal/80 dark:text-dark-muted">
                 <tr>
-                  <td className="p-3 font-medium">S</td>
+                  <td className="p-3 font-medium text-brand-charcoal dark:text-dark-text">S</td>
                   <td className="p-3">42</td>
                   <td className="p-3">28</td>
                   <td className="p-3">18.5</td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-medium">M</td>
+                  <td className="p-3 font-medium text-brand-charcoal dark:text-dark-text">M</td>
                   <td className="p-3">44</td>
                   <td className="p-3">29</td>
                   <td className="p-3">19</td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-medium">L</td>
+                  <td className="p-3 font-medium text-brand-charcoal dark:text-dark-text">L</td>
                   <td className="p-3">46</td>
                   <td className="p-3">30</td>
                   <td className="p-3">19.5</td>
                 </tr>
                 <tr>
-                  <td className="p-3 font-medium">XL</td>
+                  <td className="p-3 font-medium text-brand-charcoal dark:text-dark-text">XL</td>
                   <td className="p-3">48</td>
                   <td className="p-3">31</td>
                   <td className="p-3">20</td>
@@ -401,11 +462,11 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
               </tbody>
             </table>
           </div>
-          <div className="border-t border-brand-charcoal/10 pt-4 flex justify-between items-center text-[10px] uppercase font-semibold text-brand-charcoal/50 tracking-wider">
+          <div className="border-t border-brand-charcoal/10 dark:border-dark-border pt-4 flex justify-between items-center text-[10px] uppercase font-semibold text-brand-charcoal/50 dark:text-dark-muted tracking-wider">
             <span>Kurta/Duster lengths: 40 - 58 inches long</span>
             <button
               onClick={() => setIsSizeGuideOpen(false)}
-              className="text-brand-gold underline hover:text-brand-charcoal transition-colors cursor-pointer"
+              className="text-brand-gold dark:text-dark-gold underline hover:text-brand-charcoal dark:hover:text-dark-text transition-colors duration-300 cursor-pointer"
             >
               Close Guide
             </button>

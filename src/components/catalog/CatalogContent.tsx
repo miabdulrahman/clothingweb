@@ -7,6 +7,7 @@ import FilterPanel from '@/components/catalog/FilterPanel';
 import SortDropdown from '@/components/catalog/SortDropdown';
 import ProductGrid from '@/components/product/ProductGrid';
 import Button from '@/components/ui/Button';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface CatalogContentProps {
   products: Product[];
@@ -95,16 +96,16 @@ export default function CatalogContent({
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Top Banner / Header */}
       <div className="space-y-2">
-        <h1 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-wider text-brand-charcoal">
+        <h1 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text">
           The Catalog
         </h1>
-        <p className="text-sm text-brand-charcoal/50 font-light max-w-lg">
+        <p className="text-sm text-brand-charcoal/50 dark:text-dark-muted font-light max-w-lg">
           Browse our entire selection of loose-fit tops, premium washed linen trousers, layered dusters, and minimalist kurtas.
         </p>
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center justify-between border-y border-brand-charcoal/10 py-4">
+      <div className="flex items-center justify-between border-y border-brand-charcoal/10 dark:border-dark-border py-4">
         {/* Mobile Filters Toggle */}
         <div className="md:hidden">
           <Button
@@ -118,7 +119,7 @@ export default function CatalogContent({
             </svg>
             <span>Filters</span>
             {filters.categories.length + filters.sizes.length + filters.colors.length > 0 && (
-              <span className="w-5 h-5 bg-brand-charcoal text-brand-cream rounded-full flex items-center justify-center text-[10px]">
+              <span className="w-5 h-5 bg-brand-charcoal dark:bg-dark-gold text-brand-cream dark:text-dark-bg rounded-full flex items-center justify-center text-[10px]">
                 {filters.categories.length + filters.sizes.length + filters.colors.length}
               </span>
             )}
@@ -126,7 +127,7 @@ export default function CatalogContent({
         </div>
 
         {/* Product Count (Desktop) */}
-        <div className="hidden md:block text-xs uppercase tracking-widest font-semibold text-brand-charcoal/55">
+        <div className="hidden md:block text-xs uppercase tracking-widest font-semibold text-brand-charcoal/55 dark:text-dark-muted">
           Showing {products.length} Products
         </div>
 
@@ -147,11 +148,11 @@ export default function CatalogContent({
         </aside>
 
         {/* Product Grid Area */}
-        <div className="flex-grow">
+        <div className={`flex-grow transition-opacity duration-300 ${isPending ? 'opacity-50' : 'opacity-100'}`}>
           {isPending ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 opacity-60 transition-opacity">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {Array.from({ length: 8 }).map((_, i) => (
-                <div key={i} className="aspect-[3/4] bg-brand-charcoal/5 animate-pulse" />
+                <div key={i} className="aspect-[3/4] bg-brand-charcoal/5 dark:bg-dark-card animate-pulse" />
               ))}
             </div>
           ) : (
@@ -161,51 +162,63 @@ export default function CatalogContent({
       </div>
 
       {/* Mobile Drawer Filters */}
-      {isMobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex justify-end">
-          {/* Backdrop */}
-          <div
-            onClick={() => setIsMobileFiltersOpen(false)}
-            className="fixed inset-0 bg-brand-charcoal/45 backdrop-blur-sm"
-          />
-          {/* Drawer content */}
-          <div className="relative w-4/5 max-w-sm bg-brand-cream h-full p-6 shadow-xl overflow-y-auto flex flex-col justify-between">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-brand-charcoal/10 pb-4">
-                <h3 className="font-display text-lg font-bold uppercase tracking-wider text-brand-charcoal">
-                  Filter & Sort
-                </h3>
-                <button
-                  onClick={() => setIsMobileFiltersOpen(false)}
-                  className="text-brand-charcoal/50 p-1"
-                >
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+      <AnimatePresence>
+        {isMobileFiltersOpen && (
+          <div className="fixed inset-0 z-50 md:hidden flex justify-end">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsMobileFiltersOpen(false)}
+              className="fixed inset-0 bg-brand-charcoal/50 dark:bg-black/60 backdrop-blur-sm"
+            />
+            {/* Drawer content */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+              className="relative w-4/5 max-w-sm bg-brand-cream dark:bg-dark-surface h-full p-6 shadow-xl dark:shadow-black/40 overflow-y-auto flex flex-col justify-between transition-theme"
+            >
+              <div className="space-y-6">
+                <div className="flex items-center justify-between border-b border-brand-charcoal/10 dark:border-dark-border pb-4">
+                  <h3 className="font-display text-lg font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text">
+                    Filter & Sort
+                  </h3>
+                  <button
+                    onClick={() => setIsMobileFiltersOpen(false)}
+                    className="text-brand-charcoal/50 dark:text-dark-muted p-1 hover:text-brand-charcoal dark:hover:text-dark-text transition-colors duration-300 cursor-pointer"
+                  >
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                <FilterPanel
+                  categories={categories}
+                  filters={filters}
+                  onChange={handleFilterChange}
+                  onClear={handleClearAll}
+                />
               </div>
 
-              <FilterPanel
-                categories={categories}
-                filters={filters}
-                onChange={handleFilterChange}
-                onClear={handleClearAll}
-              />
-            </div>
-
-            <div className="pt-6 border-t border-brand-charcoal/10 mt-6">
-              <Button
-                variant="primary"
-                fullWidth
-                onClick={() => setIsMobileFiltersOpen(false)}
-                className="py-3"
-              >
-                Apply Filters ({products.length})
-              </Button>
-            </div>
+              <div className="pt-6 border-t border-brand-charcoal/10 dark:border-dark-border mt-6">
+                <Button
+                  variant="primary"
+                  fullWidth
+                  onClick={() => setIsMobileFiltersOpen(false)}
+                  className="py-3"
+                >
+                  Apply Filters ({products.length})
+                </Button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </div>
   );
 }

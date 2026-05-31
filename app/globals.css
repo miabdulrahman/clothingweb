@@ -8,12 +8,28 @@
   --color-brand-olive: #6B7B3A;
   --color-brand-gold: #B8A07E;
 
+  /* Dark mode palette */
+  --color-dark-bg: #0F0F0F;
+  --color-dark-surface: #1A1A1A;
+  --color-dark-card: #222222;
+  --color-dark-border: #2E2E2E;
+  --color-dark-text: #EDEDED;
+  --color-dark-muted: #9A9A9A;
+  --color-dark-gold: #D4B896;
+
   --font-display: var(--font-outfit), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
 
   --animate-fade-in-up: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   --animate-fade-in: fade-in 0.4s ease-out forwards;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
 }
+
+/* ============================
+   Keyframe Animations
+   ============================ */
 
 @keyframes fade-in-up {
   from {
@@ -27,35 +43,66 @@
 }
 
 @keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 160, 126, 0.4); }
+  50% { box-shadow: 0 0 20px 4px rgba(184, 160, 126, 0.15); }
+}
+
+@keyframes slide-in-right {
   from {
     opacity: 0;
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
+    transform: translateX(0);
   }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-brand-cream);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-brand-beige);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-brand-gold);
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Base resets & styling */
+@keyframes breathing {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes ring-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ============================
+   Light Mode Base
+   ============================ */
+
 :root {
   background-color: var(--color-brand-cream);
   color: var(--color-brand-charcoal);
   font-family: var(--font-sans);
+  --scrollbar-track: var(--color-brand-cream);
+  --scrollbar-thumb: var(--color-brand-beige);
+  --scrollbar-hover: var(--color-brand-gold);
+  --glass-bg: rgba(250, 249, 246, 0.75);
+  --glass-border: rgba(45, 45, 45, 0.05);
+  --selection-bg: var(--color-brand-beige);
+  --selection-text: var(--color-brand-charcoal);
 }
 
 body {
@@ -64,34 +111,181 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Editorial selection color */
+/* ============================
+   Dark Mode Overrides
+   ============================ */
+
+:root.dark {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+  --scrollbar-track: var(--color-dark-bg);
+  --scrollbar-thumb: var(--color-dark-border);
+  --scrollbar-hover: var(--color-dark-gold);
+  --glass-bg: rgba(26, 26, 26, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --selection-bg: var(--color-dark-gold);
+  --selection-text: var(--color-dark-bg);
+}
+
+.dark body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+}
+
+/* ============================
+   Selection & Scrollbar
+   ============================ */
+
 ::selection {
-  background-color: var(--color-brand-beige);
-  color: var(--color-brand-charcoal);
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
 }
 
-/* Smooth active scroll container */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover);
+}
+
+/* ============================
+   No Scrollbar Utility
+   ============================ */
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Glassmorphism utility */
+/* ============================
+   Glassmorphism Utilities
+   ============================ */
+
 .glass {
-  background: rgba(250, 249, 246, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(45, 45, 45, 0.05);
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 .glass-dark {
-  background: rgba(45, 45, 45, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(250, 249, 246, 0.1);
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================
+   Smooth Transitions
+   ============================ */
+
+.transition-theme {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ============================
+   Shimmer Effect (for loading / hover)
+   ============================ */
+
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+.dark .shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* ============================
+   Hover Underline Animation
+   ============================ */
+
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: currentColor;
+  transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* ============================
+   Ring Pulse (WhatsApp button)
+   ============================ */
+
+.ring-pulse::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid currentColor;
+  animation: ring-pulse 2s ease-out infinite;
+  opacity: 0.5;
+}
+
+/* ============================
+   Card Hover Lift
+   ============================ */
+
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================
+   Focus Glow
+   ============================ */
+
+.focus-glow:focus {
+  box-shadow: 0 0 0 3px rgba(184, 160, 126, 0.3);
+  outline: none;
+}
+
+.dark .focus-glow:focus {
+  box-shadow: 0 0 0 3px rgba(212, 184, 150, 0.25);
 }

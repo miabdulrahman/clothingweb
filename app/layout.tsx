@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import FloatingWhatsApp from '@/components/whatsapp/FloatingWhatsApp';
 import AnalyticsTracker from '@/components/layout/AnalyticsTracker';
 import { CartProvider } from '@/context/CartContext';
+import { ThemeProvider } from '@/context/ThemeProvider';
 import CartDrawer from '@/components/cart/CartDrawer';
 import './globals.css';
 
@@ -41,19 +42,39 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${outfit.variable} ${inter.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-brand-cream text-brand-charcoal font-sans">
-        <CartProvider>
-          <Navbar />
-          <main className="flex-grow pt-24 md:pt-28">
-            {children}
-          </main>
-          <Footer />
-          <CartDrawer />
-          <FloatingWhatsApp />
-          <AnalyticsTracker />
-        </CartProvider>
+      <head>
+        {/* Prevent FOUC: apply dark class before paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('auren-theme');
+                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch(e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-brand-cream dark:bg-dark-bg text-brand-charcoal dark:text-dark-text font-sans transition-theme">
+        <ThemeProvider>
+          <CartProvider>
+            <Navbar />
+            <main className="flex-grow pt-24 md:pt-28">
+              {children}
+            </main>
+            <Footer />
+            <CartDrawer />
+            <FloatingWhatsApp />
+            <AnalyticsTracker />
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

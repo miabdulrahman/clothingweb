@@ -10,13 +10,13 @@ interface SortDropdownProps {
 export default function SortDropdown({ value, onChange }: SortDropdownProps) {
   return (
     <div className="flex items-center space-x-2">
-      <span className="text-[10px] uppercase tracking-widest font-semibold text-brand-charcoal/50">
+      <span className="text-[10px] uppercase tracking-widest font-semibold text-brand-charcoal/50 dark:text-dark-muted">
         Sort By:
       </span>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value as SortOption)}
-        className="bg-transparent border border-brand-charcoal/15 text-xs text-brand-charcoal/80 focus:outline-none focus:border-brand-charcoal px-3 py-1.5 rounded-none font-medium tracking-wide uppercase transition-colors"
+        className="bg-transparent border border-brand-charcoal/15 dark:border-dark-border text-xs text-brand-charcoal/80 dark:text-dark-muted focus:outline-none focus:border-brand-charcoal dark:focus:border-dark-gold px-3 py-1.5 rounded-none font-medium tracking-wide uppercase transition-colors duration-300 dark:bg-dark-surface"
       >
         <option value="featured">Curated</option>
         <option value="newest">New Arrivals</option>
