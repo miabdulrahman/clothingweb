@@ -11,9 +11,9 @@ interface AnimationProps {
 }
 
 // Smoother ease curves
-const smoothEase = [0.25, 0.46, 0.45, 0.94];
-const decelerate = [0.0, 0.0, 0.2, 1.0];
-const snappy = [0.16, 1, 0.3, 1];
+const smoothEase: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
+const decelerate: [number, number, number, number] = [0.0, 0.0, 0.2, 1.0];
+const snappy: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export function FadeIn({ children, className, delay = 0, duration = 0.6 }: AnimationProps) {
   return (
