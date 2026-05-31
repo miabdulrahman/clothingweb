@@ -13,10 +13,20 @@ function AnalyticsTrackerContent() {
     // We ignore admin page views in our public metrics to keep statistics accurate
     if (pathname.startsWith('/admin')) return;
 
+    // Prevent duplicate logs for the same page in the current session (e.g. on page refresh)
+    const pageUrl = `${pathname}${searchParams.toString() ? '?' + searchParams.toString() : ''}`;
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const cacheKey = `logged_pv_${pageUrl}`;
+      if (window.sessionStorage.getItem(cacheKey)) {
+        return;
+      }
+      window.sessionStorage.setItem(cacheKey, 'true');
+    }
+
     logAnalyticsEvent(
       'page_view',
       {
-        url: `${pathname}${searchParams.toString() ? '?' + searchParams.toString() : ''}`,
+        url: pageUrl,
         referrer: typeof document !== 'undefined' ? document.referrer : '',
       },
       pathname

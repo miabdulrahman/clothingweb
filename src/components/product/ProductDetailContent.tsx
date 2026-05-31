@@ -39,12 +39,24 @@ export default function ProductDetailContent({ product, relatedProducts }: Produ
       setSelectedColor(product.colors[0]);
     }
 
-    // Log product view event
-    logAnalyticsEvent('product_view', {
-      product_id: product.id,
-      product_title: product.title,
-      product_price: product.price,
-    });
+    // Log product view event with session cache check
+    let shouldLog = true;
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const cacheKey = `logged_prod_view_${product.id}`;
+      if (window.sessionStorage.getItem(cacheKey)) {
+        shouldLog = false;
+      } else {
+        window.sessionStorage.setItem(cacheKey, 'true');
+      }
+    }
+
+    if (shouldLog) {
+      logAnalyticsEvent('product_view', {
+        product_id: product.id,
+        product_title: product.title,
+        product_price: product.price,
+      });
+    }
   }, [product]);
 
   // Track select events
