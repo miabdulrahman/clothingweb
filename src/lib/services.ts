@@ -457,13 +457,9 @@ export async function createProduct(
 
     if (error) throw error;
     return data;
-  } catch (err) {
-    console.error('Error creating product in Supabase, using mock fallback:', err);
-    MOCK_PRODUCTS.unshift(newProduct);
-    return {
-      ...newProduct,
-      category: MOCK_CATEGORIES.find(c => c.id === newProduct.category_id)
-    };
+  } catch (err: any) {
+    console.error('Error creating product in Supabase:', err);
+    throw new Error(err.message || 'Failed to create product in database.');
   }
 }
 
@@ -500,21 +496,9 @@ export async function updateProduct(
 
     if (error) throw error;
     return data;
-  } catch (err) {
-    console.error(`Error updating product ${id} in Supabase, using mock fallback:`, err);
-    const idx = MOCK_PRODUCTS.findIndex(p => p.id === id);
-    if (idx !== -1) {
-      MOCK_PRODUCTS[idx] = {
-        ...MOCK_PRODUCTS[idx],
-        ...productData,
-        updated_at: new Date().toISOString()
-      };
-      return {
-        ...MOCK_PRODUCTS[idx],
-        category: MOCK_CATEGORIES.find(c => c.id === MOCK_PRODUCTS[idx].category_id)
-      };
-    }
-    return null;
+  } catch (err: any) {
+    console.error(`Error updating product ${id} in Supabase:`, err);
+    throw new Error(err.message || 'Failed to update product in database.');
   }
 }
 
@@ -539,14 +523,9 @@ export async function deleteProduct(id: string): Promise<boolean> {
 
     if (error) throw error;
     return true;
-  } catch (err) {
-    console.error(`Error deleting product ${id} in Supabase, using mock fallback:`, err);
-    const idx = MOCK_PRODUCTS.findIndex(p => p.id === id);
-    if (idx !== -1) {
-      MOCK_PRODUCTS.splice(idx, 1);
-      return true;
-    }
-    return false;
+  } catch (err: any) {
+    console.error(`Error deleting product ${id} in Supabase:`, err);
+    throw new Error(err.message || 'Failed to delete product from database.');
   }
 }
 

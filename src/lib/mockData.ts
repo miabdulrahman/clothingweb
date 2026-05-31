@@ -81,7 +81,7 @@ export const MOCK_CATEGORIES: Category[] = [
 
 export const MOCK_PRODUCTS: Product[] = [
   {
-    id: 'p1000000-0000-0000-0000-000000000001',
+    id: 'a1000000-0000-0000-0000-000000000001',
     title: 'Oversized Premium Tee',
     slug: 'oversized-premium-tee',
     description: 'Relaxed fit tee designed for clean, modest everyday wear.',
@@ -106,7 +106,7 @@ export const MOCK_PRODUCTS: Product[] = [
     updated_at: new Date().toISOString()
   },
   {
-    id: 'p1000000-0000-0000-0000-000000000002',
+    id: 'a1000000-0000-0000-0000-000000000002',
     title: 'Relaxed Linen Trouser',
     slug: 'relaxed-linen-trouser',
     description: 'Flowy and breathable trousers crafted from premium washed linen.',
@@ -131,7 +131,7 @@ export const MOCK_PRODUCTS: Product[] = [
     updated_at: new Date().toISOString()
   },
   {
-    id: 'p1000000-0000-0000-0000-000000000003',
+    id: 'a1000000-0000-0000-0000-000000000003',
     title: "Men's Open Duster Cardigan",
     slug: 'mens-open-duster-cardigan',
     description: 'A minimalist open-front duster cardigan for elegant daily layering.',
@@ -156,7 +156,7 @@ export const MOCK_PRODUCTS: Product[] = [
     updated_at: new Date().toISOString()
   },
   {
-    id: 'p1000000-0000-0000-0000-000000000004',
+    id: 'a1000000-0000-0000-0000-000000000004',
     title: 'Linen Resort Button-Up',
     slug: 'linen-resort-button-up',
     description: 'Relaxed long-line shirt in soft-washed linen for men.',
@@ -181,7 +181,7 @@ export const MOCK_PRODUCTS: Product[] = [
     updated_at: new Date().toISOString()
   },
   {
-    id: 'p1000000-0000-0000-0000-000000000005',
+    id: 'a1000000-0000-0000-0000-000000000005',
     title: 'Heavyweight Hooded Duster',
     slug: 'heavyweight-hooded-duster',
     description: 'Unisex heavy knit duster cardigan with a generous hood.',
@@ -206,7 +206,7 @@ export const MOCK_PRODUCTS: Product[] = [
     updated_at: new Date().toISOString()
   },
   {
-    id: 'p1000000-0000-0000-0000-000000000006',
+    id: 'a1000000-0000-0000-0000-000000000006',
     title: 'Modular Travel Cargo Pants',
     slug: 'modular-travel-cargo-pants',
     description: 'Loose-fit utility cargos with water-resistant finish.',
@@ -231,7 +231,7 @@ export const MOCK_PRODUCTS: Product[] = [
     updated_at: new Date().toISOString()
   },
   {
-    id: 'p1000000-0000-0000-0000-000000000007',
+    id: 'a1000000-0000-0000-0000-000000000007',
     title: 'Textured Crepe Kurta Tunic',
     slug: 'textured-crepe-kurta-tunic',
     description: 'Elegant high-neck long-line kurta with subtle detailing.',
@@ -256,11 +256,11 @@ export const MOCK_PRODUCTS: Product[] = [
     updated_at: new Date().toISOString()
   },
   {
-    id: 'p1000000-0000-0000-0000-000000000008',
+    id: 'a1000000-0000-0000-0000-000000000008',
     title: 'Essential Layering Slip Tunic',
     slug: 'essential-layering-slip-tunic',
     description: 'Opaque crew-neck inner layering tunic for men.',
-    full_description: 'A straight-cut sleeveless slip tunic designed specifically for layering. Made from non-see-through satin-back crepe. Features a high crew neck and side slits for ease of movement under open cardigans and dusters.',
+    full_description: 'A wardrobe staple designed specifically for layering. Made from non-see-through satin-back crepe. Features a high crew neck and side slits for ease of movement under open cardigans and dusters.',
     price: 4200,
     currency: 'LKR',
     category_id: 'c1000000-0000-0000-0000-000000000007',
@@ -284,32 +284,32 @@ export const MOCK_PRODUCTS: Product[] = [
 
 export const MOCK_LOOKBOOK: LookbookItem[] = [
   {
-    id: 'l1000000-0000-0000-0000-000000000001',
+    id: 'b1000000-0000-0000-0000-000000000001',
     title: 'Oversized Minimalism',
     image: '/images/mens_hero_bg.png',
     caption: 'A clean combination of our Oversized Premium Tee and Relaxed Linen Trouser in natural, warm sand tones.',
     collection: 'Summer 2026',
-    related_product_ids: ['p1000000-0000-0000-0000-000000000001', 'p1000000-0000-0000-0000-000000000002'],
+    related_product_ids: ['a1000000-0000-0000-0000-000000000001', 'a1000000-0000-0000-0000-000000000002'],
     sort_order: 1,
     created_at: new Date().toISOString()
   },
   {
-    id: 'l1000000-0000-0000-0000-000000000002',
+    id: 'b1000000-0000-0000-0000-000000000002',
     title: 'Modern Utility & Layers',
     image: '/images/mens_streetwear_fit.png',
     caption: 'Layering with the Heavyweight Hooded Duster and Modular Travel Cargo Pants for an active yet modest urban silhouette.',
     collection: 'Winter 2026',
-    related_product_ids: ['p1000000-0000-0000-0000-000000000005', 'p1000000-0000-0000-0000-000000000006'],
+    related_product_ids: ['a1000000-0000-0000-0000-000000000005', 'a1000000-0000-0000-0000-000000000006'],
     sort_order: 2,
     created_at: new Date().toISOString()
   },
   {
-    id: 'l1000000-0000-0000-0000-000000000003',
+    id: 'b1000000-0000-0000-0000-000000000003',
     title: 'Traditional Modernity',
     image: '/images/mens_kurta_fit.png',
     caption: 'The Textured Crepe Kurta Tunic paired over our Essential Layering Slip Tunic for structured modest formal look.',
     collection: 'Spring 2026',
-    related_product_ids: ['p1000000-0000-0000-0000-000000000007', 'p1000000-0000-0000-0000-000000000008'],
+    related_product_ids: ['a1000000-0000-0000-0000-000000000007', 'a1000000-0000-0000-0000-000000000008'],
     sort_order: 3,
     created_at: new Date().toISOString()
   }
