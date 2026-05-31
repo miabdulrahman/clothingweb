@@ -49,23 +49,23 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 bg-brand-charcoal/40 dark:bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-brand-charcoal/45 dark:bg-black/60 backdrop-blur-sm"
           />
 
           {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 12 }}
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 12 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 350 }}
-            className={`relative w-full ${sizeClasses[size]} bg-brand-cream dark:bg-dark-surface border border-brand-charcoal/10 dark:border-dark-border shadow-2xl dark:shadow-black/40 p-6 md:p-8 z-10 flex flex-col transition-theme`}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+            className={`relative w-full ${sizeClasses[size]} bg-brand-cream dark:bg-[#1E1E1E] border border-brand-charcoal/10 dark:border-white/10 shadow-2xl p-6 md:p-8 z-10 flex flex-col text-brand-charcoal dark:text-brand-cream transition-colors duration-300`}
           >
             {/* Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-brand-charcoal/10 dark:border-dark-border">
+            <div className="flex items-center justify-between pb-4 border-b border-brand-charcoal/10 dark:border-white/10">
               {title ? (
-                <h3 className="font-display text-lg font-bold uppercase tracking-wider text-brand-charcoal dark:text-dark-text">
+                <h3 className="font-display text-lg font-bold uppercase tracking-wider text-brand-charcoal dark:text-brand-cream">
                   {title}
                 </h3>
               ) : (
@@ -73,7 +73,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
               )}
               <button
                 onClick={onClose}
-                className="text-brand-charcoal/50 dark:text-dark-muted hover:text-brand-charcoal dark:hover:text-dark-text p-1 transition-colors duration-300 focus:outline-none cursor-pointer"
+                className="text-brand-charcoal/50 hover:text-brand-charcoal dark:text-brand-cream/50 dark:hover:text-brand-cream p-1 transition-colors focus:outline-none cursor-pointer"
                 aria-label="Close modal"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

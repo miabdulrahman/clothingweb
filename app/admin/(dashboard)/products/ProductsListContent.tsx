@@ -123,8 +123,8 @@ export default function ProductsListContent({
         <div 
           className={`fixed top-6 right-6 z-50 px-6 py-4 border shadow-xl transition-all duration-300 animate-fade-in ${
             toast.type === 'success' 
-              ? 'bg-brand-charcoal text-brand-cream border-brand-charcoal' 
-              : 'bg-red-50 text-red-700 border-red-200'
+              ? 'bg-brand-charcoal text-brand-cream border-brand-charcoal dark:bg-brand-gold dark:text-brand-charcoal dark:border-brand-gold' 
+              : 'bg-red-50 text-red-700 border-red-200 dark:bg-red-950/45 dark:text-red-400 dark:border-red-900/50'
           }`}
         >
           <p className="text-xs uppercase tracking-widest font-semibold">
@@ -134,11 +134,11 @@ export default function ProductsListContent({
       )}
 
       {/* Control Bar (Filters + Add button) */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between bg-white border border-brand-charcoal/10 p-5">
+      <div className="flex flex-col md:flex-row gap-4 justify-between bg-white border border-brand-charcoal/10 p-5 dark:bg-[#121212] dark:border-white/10">
         <div className="flex-1 flex flex-col sm:flex-row gap-3">
           {/* Search Box */}
           <div className="relative flex-1">
-            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-brand-charcoal/40">
+            <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-brand-charcoal/40 dark:text-white/40">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -148,7 +148,7 @@ export default function ProductsListContent({
               placeholder="Search products by title, style label..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors placeholder:text-brand-charcoal/40"
+              className="w-full pl-9 pr-4 py-2.5 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors placeholder:text-brand-charcoal/40 dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream dark:placeholder:text-white/40"
             />
           </div>
 
@@ -157,7 +157,7 @@ export default function ProductsListContent({
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full px-4 py-2.5 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors uppercase tracking-wider font-semibold"
+              className="w-full px-4 py-2.5 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors uppercase tracking-wider font-semibold dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream"
             >
               <option value="all">All Categories</option>
               {categories.map((cat) => (
@@ -177,22 +177,22 @@ export default function ProductsListContent({
       </div>
 
       {/* Products Table Wrapper */}
-      <div className="bg-white border border-brand-charcoal/10 overflow-hidden">
+      <div className="bg-white border border-brand-charcoal/10 overflow-hidden dark:bg-[#121212] dark:border-white/10">
         {filteredProducts.length === 0 ? (
-          <div className="p-16 text-center text-brand-charcoal/50">
-            <svg className="w-12 h-12 mx-auto mb-4 text-brand-charcoal/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="p-16 text-center text-brand-charcoal/50 dark:text-white/50">
+            <svg className="w-12 h-12 mx-auto mb-4 text-brand-charcoal/20 dark:text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
             <p className="text-xs uppercase tracking-widest font-semibold">No products found</p>
             <p className="text-[10px] mt-1">Try modifying your search query or filters.</p>
           </div>
-                ) : (
+        ) : (
           <>
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full border-collapse text-left">
                 <thead>
-                  <tr className="border-b border-brand-charcoal/10 bg-brand-cream text-[10px] uppercase tracking-widest text-brand-charcoal/60 font-semibold">
+                  <tr className="border-b border-brand-charcoal/10 bg-brand-cream text-[10px] uppercase tracking-widest text-brand-charcoal/60 font-semibold dark:border-white/10 dark:bg-[#1A1A1A] dark:text-white/60">
                     <th className="py-4 px-6 font-semibold">Product</th>
                     <th className="py-4 px-4 font-semibold">Category</th>
                     <th className="py-4 px-4 font-semibold">Price</th>
@@ -201,12 +201,12 @@ export default function ProductsListContent({
                     <th className="py-4 px-6 font-semibold text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-brand-charcoal/5 text-xs">
+                <tbody className="divide-y divide-brand-charcoal/5 dark:divide-white/5 text-xs">
                   {filteredProducts.map((product) => (
-                    <tr key={product.id} className="hover:bg-brand-cream/20 transition-colors">
+                    <tr key={product.id} className="hover:bg-brand-cream/20 dark:hover:bg-white/5 transition-colors">
                       {/* Item details */}
                       <td className="py-4 px-6 flex items-center gap-4 min-w-[280px]">
-                        <div className="w-12 h-16 bg-brand-cream relative flex-shrink-0 border border-brand-charcoal/5">
+                        <div className="w-12 h-16 bg-brand-cream relative flex-shrink-0 border border-brand-charcoal/5 dark:bg-[#1A1A1A] dark:border-white/5">
                           {product.images && product.images.length > 0 ? (
                             <Image
                               src={product.images[0]}
@@ -217,16 +217,16 @@ export default function ProductsListContent({
                               unoptimized={product.images[0].startsWith('http')}
                             />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-[10px] text-brand-charcoal/30">
+                            <div className="w-full h-full flex items-center justify-center text-[10px] text-brand-charcoal/30 dark:text-white/30">
                               N/A
                             </div>
                           )}
                         </div>
                         <div className="min-w-0">
-                          <span className="font-semibold text-brand-charcoal uppercase tracking-wider block truncate">
+                          <span className="font-semibold text-brand-charcoal uppercase tracking-wider block truncate dark:text-brand-cream">
                             {product.title}
                           </span>
-                          <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[9px] text-brand-charcoal/50 uppercase tracking-widest font-medium">
+                          <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[9px] text-brand-charcoal/50 uppercase tracking-widest font-medium dark:text-white/40">
                             {product.style_label && (
                               <span className="text-brand-gold font-semibold">{product.style_label}</span>
                             )}
@@ -239,12 +239,12 @@ export default function ProductsListContent({
                       </td>
 
                       {/* Category */}
-                      <td className="py-4 px-4 align-middle text-brand-charcoal/80 uppercase tracking-wider text-[10px] font-semibold">
+                      <td className="py-4 px-4 align-middle text-brand-charcoal/80 uppercase tracking-wider text-[10px] font-semibold dark:text-brand-cream/80">
                         {product.category?.name || 'Unassigned'}
                       </td>
 
                       {/* Price */}
-                      <td className="py-4 px-4 align-middle font-medium text-brand-charcoal/80">
+                      <td className="py-4 px-4 align-middle font-medium text-brand-charcoal/80 dark:text-brand-cream/80">
                         {formatPrice(product.price, product.currency)}
                       </td>
 
@@ -254,8 +254,8 @@ export default function ProductsListContent({
                           onClick={() => handleToggleFeatured(product)}
                           className={`inline-flex items-center justify-center p-1 border rounded-none cursor-pointer transition-colors duration-300 ${
                             product.featured
-                              ? 'bg-brand-gold text-brand-cream border-brand-gold'
-                              : 'bg-transparent text-brand-charcoal/30 border-brand-charcoal/10 hover:border-brand-gold'
+                              ? 'bg-brand-gold text-brand-cream border-brand-gold dark:text-brand-charcoal'
+                              : 'bg-transparent text-brand-charcoal/30 border-brand-charcoal/10 hover:border-brand-gold dark:text-white/30 dark:border-white/10 dark:hover:border-brand-gold'
                           }`}
                           aria-label="Toggle featured"
                         >
@@ -271,8 +271,8 @@ export default function ProductsListContent({
                           onClick={() => handleToggleStock(product)}
                           className={`inline-flex px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold cursor-pointer border transition-colors duration-300 ${
                             product.in_stock
-                              ? 'bg-[#25D366]/10 text-[#20ba5a] border-[#25D366]/20 hover:bg-[#25D366]/20'
-                              : 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100'
+                              ? 'bg-[#25D366]/10 text-[#20ba5a] border-[#25D366]/20 hover:bg-[#25D366]/20 dark:bg-[#25D366]/5 dark:text-[#25D366] dark:border-[#25D366]/10 dark:hover:bg-[#25D366]/15'
+                              : 'bg-red-50 text-red-600 border-red-100 hover:bg-red-100 dark:bg-red-950/20 dark:text-red-400 dark:border-red-900/30 dark:hover:bg-red-950/30'
                           }`}
                         >
                           {product.in_stock ? 'In Stock' : 'Out of Stock'}
@@ -283,13 +283,13 @@ export default function ProductsListContent({
                       <td className="py-4 px-6 align-middle text-right space-x-3">
                         <Link
                           href={`/admin/products/${product.id}`}
-                          className="text-[10px] uppercase tracking-widest text-brand-gold hover:text-brand-charcoal transition-colors font-semibold"
+                          className="text-[10px] uppercase tracking-widest text-brand-gold hover:text-brand-charcoal dark:hover:text-brand-cream transition-colors font-semibold"
                         >
                           Edit
                         </Link>
                         <button
                           onClick={() => setProductToDelete(product)}
-                          className="text-[10px] uppercase tracking-widest text-red-500 hover:text-red-700 transition-colors font-semibold cursor-pointer"
+                          className="text-[10px] uppercase tracking-widest text-red-500 hover:text-red-700 dark:hover:text-red-400 transition-colors font-semibold cursor-pointer"
                         >
                           Delete
                         </button>
@@ -301,12 +301,12 @@ export default function ProductsListContent({
             </div>
 
             {/* Mobile Card List View */}
-            <div className="md:hidden divide-y divide-brand-charcoal/10">
+            <div className="md:hidden divide-y divide-brand-charcoal/10 dark:divide-white/10">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="p-4 space-y-4 hover:bg-brand-cream/10 transition-colors">
+                <div key={product.id} className="p-4 space-y-4 hover:bg-brand-cream/10 dark:hover:bg-white/5 transition-colors">
                   <div className="flex gap-4">
                     {/* Image */}
-                    <div className="w-14 h-20 bg-brand-cream relative flex-shrink-0 border border-brand-charcoal/5">
+                    <div className="w-14 h-20 bg-brand-cream relative flex-shrink-0 border border-brand-charcoal/5 dark:bg-[#1A1A1A] dark:border-white/5">
                       {product.images && product.images.length > 0 ? (
                         <Image
                           src={product.images[0]}
@@ -317,27 +317,27 @@ export default function ProductsListContent({
                           unoptimized={product.images[0].startsWith('http')}
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-[9px] text-brand-charcoal/30">
+                        <div className="w-full h-full flex items-center justify-center text-[9px] text-brand-charcoal/30 dark:text-white/30">
                           N/A
                         </div>
                       )}
                     </div>
                     {/* Details */}
                     <div className="min-w-0 flex-1 space-y-1">
-                      <span className="font-semibold text-brand-charcoal uppercase tracking-wider text-xs block truncate">
+                      <span className="font-semibold text-brand-charcoal uppercase tracking-wider text-xs block truncate dark:text-brand-cream">
                         {product.title}
                       </span>
-                      <p className="text-[10px] text-brand-charcoal/80 font-medium uppercase tracking-wider">
+                      <p className="text-[10px] text-brand-charcoal/80 font-medium uppercase tracking-wider dark:text-brand-cream/80">
                         {product.category?.name || 'Unassigned'}
                       </p>
-                      <p className="text-xs font-bold text-brand-charcoal/90">
+                      <p className="text-xs font-bold text-brand-charcoal/90 dark:text-brand-cream/90">
                         {formatPrice(product.price, product.currency)}
                       </p>
                     </div>
                   </div>
 
                   {/* Attributes details */}
-                  <div className="flex flex-wrap gap-2 text-[9px] text-brand-charcoal/50 uppercase tracking-widest font-semibold">
+                  <div className="flex flex-wrap gap-2 text-[9px] text-brand-charcoal/50 uppercase tracking-widest font-semibold dark:text-white/40">
                     {product.style_label && (
                       <span className="text-brand-gold">{product.style_label}</span>
                     )}
@@ -348,15 +348,15 @@ export default function ProductsListContent({
                   </div>
 
                   {/* Quick Toggles & Actions */}
-                  <div className="flex items-center justify-between gap-4 pt-3 border-t border-brand-charcoal/5">
+                  <div className="flex items-center justify-between gap-4 pt-3 border-t border-brand-charcoal/5 dark:border-white/5">
                     <div className="flex items-center gap-2">
                       {/* Featured button */}
                       <button
                         onClick={() => handleToggleFeatured(product)}
                         className={`inline-flex items-center gap-1.5 px-2 py-1 text-[9px] uppercase tracking-widest font-semibold border transition-all duration-300 ${
                           product.featured
-                            ? 'bg-brand-gold text-brand-cream border-brand-gold'
-                            : 'bg-transparent text-brand-charcoal/40 border-brand-charcoal/10 hover:border-brand-gold'
+                            ? 'bg-brand-gold text-brand-cream border-brand-gold dark:text-brand-charcoal'
+                            : 'bg-transparent text-brand-charcoal/40 border-brand-charcoal/10 hover:border-brand-gold dark:text-white/40 dark:border-white/10 dark:hover:border-brand-gold'
                         }`}
                       >
                         <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
@@ -370,8 +370,8 @@ export default function ProductsListContent({
                         onClick={() => handleToggleStock(product)}
                         className={`inline-flex px-2.5 py-1 text-[9px] uppercase tracking-widest font-semibold border transition-colors duration-300 ${
                           product.in_stock
-                            ? 'bg-[#25D366]/10 text-[#20ba5a] border-[#25D366]/20'
-                            : 'bg-red-50 text-red-600 border-red-100'
+                            ? 'bg-[#25D366]/10 text-[#20ba5a] border-[#25D366]/20 dark:bg-[#25D366]/5 dark:text-[#25D366] dark:border-[#25D366]/10'
+                            : 'bg-red-50 text-red-600 border-red-100 dark:bg-red-950/20 dark:text-red-400 dark:border-red-900/30'
                         }`}
                       >
                         {product.in_stock ? 'In Stock' : 'Out of Stock'}
@@ -382,13 +382,13 @@ export default function ProductsListContent({
                     <div className="flex gap-3">
                       <Link
                         href={`/admin/products/${product.id}`}
-                        className="text-[10px] uppercase tracking-widest text-brand-gold hover:text-brand-charcoal transition-colors font-semibold"
+                        className="text-[10px] uppercase tracking-widest text-brand-gold hover:text-brand-charcoal dark:hover:text-brand-cream transition-colors font-semibold"
                       >
                         Edit
                       </Link>
                       <button
                         onClick={() => setProductToDelete(product)}
-                        className="text-[10px] uppercase tracking-widest text-red-500 hover:text-red-700 transition-colors font-semibold cursor-pointer"
+                        className="text-[10px] uppercase tracking-widest text-red-500 hover:text-red-700 dark:hover:text-red-400 transition-colors font-semibold cursor-pointer"
                       >
                         Delete
                       </button>
@@ -409,10 +409,10 @@ export default function ProductsListContent({
           title="Delete Product"
         >
           <div className="space-y-6">
-            <p className="text-xs text-brand-charcoal/80 leading-relaxed">
-              Are you sure you want to delete <span className="font-semibold text-brand-charcoal">"{productToDelete.title}"</span>? This action is permanent and cannot be undone.
+            <p className="text-xs text-brand-charcoal/80 leading-relaxed dark:text-brand-cream/80">
+              Are you sure you want to delete <span className="font-semibold text-brand-charcoal dark:text-brand-cream">"{productToDelete.title}"</span>? This action is permanent and cannot be undone.
             </p>
-            <div className="flex gap-3 justify-end pt-4 border-t border-brand-charcoal/5">
+            <div className="flex gap-3 justify-end pt-4 border-t border-brand-charcoal/5 dark:border-white/5">
               <Button
                 variant="secondary"
                 size="sm"

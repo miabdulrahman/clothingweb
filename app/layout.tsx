@@ -5,7 +5,7 @@ import Footer from '@/components/layout/Footer';
 import FloatingWhatsApp from '@/components/whatsapp/FloatingWhatsApp';
 import AnalyticsTracker from '@/components/layout/AnalyticsTracker';
 import { CartProvider } from '@/context/CartContext';
-import { ThemeProvider } from '@/context/ThemeProvider';
+import { ThemeProvider } from '@/context/ThemeContext';
 import CartDrawer from '@/components/cart/CartDrawer';
 import './globals.css';
 
@@ -42,27 +42,29 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      suppressHydrationWarning
       className={`${outfit.variable} ${inter.variable} h-full antialiased scroll-smooth`}
     >
       <head>
-        {/* Prevent FOUC: apply dark class before paint */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem('auren-theme');
-                  if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  const savedTheme = localStorage.getItem('theme');
+                  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  const activeTheme = savedTheme || systemTheme;
+                  if (activeTheme === 'dark') {
                     document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
                   }
-                } catch(e) {}
-              })();
+                } catch (e) {}
+              })()
             `,
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-brand-cream dark:bg-dark-bg text-brand-charcoal dark:text-dark-text font-sans transition-theme">
+      <body className="min-h-full flex flex-col bg-brand-cream text-brand-charcoal dark:bg-[#121212] dark:text-brand-cream font-sans transition-colors duration-300">
         <ThemeProvider>
           <CartProvider>
             <Navbar />

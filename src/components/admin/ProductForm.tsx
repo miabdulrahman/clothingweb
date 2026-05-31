@@ -232,7 +232,7 @@ export default function ProductForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-10 animate-fade-in pb-16">
       {error && (
-        <div className="p-4 border border-red-200 bg-red-50 text-xs text-red-700 font-medium">
+        <div className="p-4 border border-red-200 bg-red-50 text-xs text-red-700 font-medium dark:bg-red-950/45 dark:text-red-400 dark:border-red-900/50">
           ⚠️ {error}
         </div>
       )}
@@ -244,15 +244,15 @@ export default function ProductForm({
         <div className="lg:col-span-2 space-y-8">
           
           {/* Card 1: Core Details */}
-          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6">
-            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3">
+          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6 dark:bg-[#121212] dark:border-white/10">
+            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3 dark:text-brand-cream dark:border-white/5">
               Core Details
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Title */}
               <div className="md:col-span-2">
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Product Title *
                 </label>
                 <input
@@ -261,13 +261,13 @@ export default function ProductForm({
                   onChange={(e) => setTitle(e.target.value)}
                   required
                   placeholder="e.g. Premium Flax Linen Kurta"
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
 
               {/* Slug */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Slug (URL Path) *
                 </label>
                 <input
@@ -276,13 +276,13 @@ export default function ProductForm({
                   onChange={(e) => setSlug(e.target.value)}
                   required
                   placeholder="e.g. premium-flax-linen-kurta"
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
 
               {/* Style Label */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Style Label / Collection
                 </label>
                 <input
@@ -290,13 +290,13 @@ export default function ProductForm({
                   value={styleLabel}
                   onChange={(e) => setStyleLabel(e.target.value)}
                   placeholder="e.g. Oversized Basics"
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
 
               {/* Short Description */}
               <div className="md:col-span-2">
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Short Description *
                 </label>
                 <textarea
@@ -305,13 +305,13 @@ export default function ProductForm({
                   required
                   rows={2}
                   placeholder="Summarize the product in 1-2 sentences..."
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors resize-none"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors resize-none"
                 />
               </div>
 
               {/* Full Description */}
               <div className="md:col-span-2">
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Full Details & Description
                 </label>
                 <textarea
@@ -319,22 +319,22 @@ export default function ProductForm({
                   onChange={(e) => setFullDescription(e.target.value)}
                   rows={5}
                   placeholder="Detailed background story, fabric drape, and design details..."
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
             </div>
           </div>
 
           {/* Card 2: Fabric & Care Accordions */}
-          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6">
-            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3">
+          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6 dark:bg-[#121212] dark:border-white/10">
+            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3 dark:text-brand-cream dark:border-white/5">
               Specifications
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Fit Notes */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Fit Notes
                 </label>
                 <textarea
@@ -342,13 +342,13 @@ export default function ProductForm({
                   onChange={(e) => setFitNotes(e.target.value)}
                   rows={3}
                   placeholder="e.g. Generously cut. Take your normal size."
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
 
               {/* Fabric Details */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Fabric Composition
                 </label>
                 <textarea
@@ -356,13 +356,13 @@ export default function ProductForm({
                   onChange={(e) => setFabric(e.target.value)}
                   rows={3}
                   placeholder="e.g. 100% Organic Linen Flax"
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
 
               {/* Care Instructions */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Care Instructions
                 </label>
                 <textarea
@@ -370,13 +370,13 @@ export default function ProductForm({
                   onChange={(e) => setCare(e.target.value)}
                   rows={3}
                   placeholder="e.g. Hand wash cold, dry flat in shade."
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
 
               {/* Delivery Info */}
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Delivery Info
                 </label>
                 <textarea
@@ -384,23 +384,23 @@ export default function ProductForm({
                   onChange={(e) => setDeliveryInfo(e.target.value)}
                   rows={3}
                   placeholder="e.g. Delivered within 2-5 days island-wide"
-                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
             </div>
           </div>
 
           {/* Card 3: Images Visuals */}
-          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6">
-            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3">
+          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6 dark:bg-[#121212] dark:border-white/10">
+            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3 dark:text-brand-cream dark:border-white/5">
               Media & Images *
             </h2>
 
             {/* Thumbnail Preview Area */}
             {imageUrls.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-brand-cream/50 border border-brand-charcoal/5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 bg-brand-cream/50 border border-brand-charcoal/5 dark:bg-[#1A1A1A]/50 dark:border-white/5">
                 {imageUrls.map((url, idx) => (
-                  <div key={idx} className="aspect-[3/4] relative bg-brand-cream group border border-brand-charcoal/10">
+                  <div key={idx} className="aspect-[3/4] relative bg-brand-cream group border border-brand-charcoal/10 dark:bg-[#1A1A1A] dark:border-white/10">
                     <img src={url} alt={`Preview ${idx + 1}`} className="object-cover w-full h-full" />
                     <button
                       type="button"
@@ -410,7 +410,7 @@ export default function ProductForm({
                       Remove
                     </button>
                     {idx === 0 && (
-                      <span className="absolute bottom-2 left-2 bg-brand-charcoal text-brand-cream text-[8px] uppercase tracking-widest px-1.5 py-0.5 font-medium">
+                      <span className="absolute bottom-2 left-2 bg-brand-charcoal text-brand-cream text-[8px] dark:bg-brand-gold dark:text-brand-charcoal uppercase tracking-widest px-1.5 py-0.5 font-medium">
                         Cover
                       </span>
                     )}
@@ -422,7 +422,7 @@ export default function ProductForm({
             {/* File Upload Selector */}
             <div className="space-y-4">
               <div>
-                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                   Upload Image File (Storage or sandbox)
                 </label>
                 <input
@@ -430,7 +430,7 @@ export default function ProductForm({
                   accept="image/*"
                   onChange={handleImageUpload}
                   disabled={loading}
-                  className="w-full text-xs text-brand-charcoal file:mr-4 file:py-2 file:px-4 file:rounded-none file:border file:border-brand-charcoal file:text-xs file:font-semibold file:uppercase file:tracking-widest file:bg-transparent file:text-brand-charcoal file:hover:bg-brand-charcoal file:hover:text-brand-cream file:transition-colors file:cursor-pointer"
+                  className="w-full text-xs text-brand-charcoal file:mr-4 file:py-2 file:px-4 file:rounded-none file:border file:border-brand-charcoal file:text-xs file:font-semibold file:uppercase file:tracking-widest file:bg-transparent file:text-brand-charcoal file:hover:bg-brand-charcoal file:hover:text-brand-cream file:transition-colors file:cursor-pointer dark:text-white dark:file:border-white/15 dark:file:text-white dark:file:hover:bg-brand-gold dark:file:hover:text-brand-charcoal"
                 />
               </div>
 
@@ -441,7 +441,7 @@ export default function ProductForm({
                   placeholder="Or paste external Unsplash image URL..."
                   value={newImageUrl}
                   onChange={(e) => setNewImageUrl(e.target.value)}
-                  className="flex-1 px-4 py-2.5 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50"
+                  className="flex-1 px-4 py-2.5 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50"
                 />
                 <Button
                   type="button"
@@ -460,18 +460,18 @@ export default function ProductForm({
         <div className="space-y-8">
           
           {/* Card 4: Inventory & Category */}
-          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6">
-            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3">
+          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6 dark:bg-[#121212] dark:border-white/10">
+            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3 dark:text-brand-cream dark:border-white/5">
               Status & Pricing
             </h2>
 
             {/* Price */}
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                 Price *
               </label>
               <div className="relative">
-                <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-xs text-brand-charcoal/40 font-semibold">
+                <span className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-xs text-brand-charcoal/40 font-semibold dark:text-white/40">
                   {currency}
                 </span>
                 <input
@@ -480,21 +480,21 @@ export default function ProductForm({
                   onChange={(e) => setPrice(e.target.value)}
                   required
                   placeholder="4500"
-                  className="w-full pl-14 pr-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
+                  className="w-full pl-14 pr-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors"
                 />
               </div>
             </div>
 
             {/* Category selection */}
             <div>
-              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                 Product Category *
               </label>
               <select
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
                 required
-                className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors uppercase tracking-wider font-semibold"
+                className="w-full px-4 py-3 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/50 transition-colors uppercase tracking-wider font-semibold"
               >
                 {categories.map((cat) => (
                   <option key={cat.id} value={cat.id}>
@@ -511,9 +511,9 @@ export default function ProductForm({
                   type="checkbox"
                   checked={inStock}
                   onChange={(e) => setInStock(e.target.checked)}
-                  className="w-4 h-4 accent-brand-charcoal rounded-none cursor-pointer"
+                  className="w-4 h-4 accent-brand-charcoal dark:accent-brand-gold rounded-none cursor-pointer"
                 />
-                <span className="text-xs uppercase tracking-widest text-brand-charcoal font-semibold">
+                <span className="text-xs uppercase tracking-widest text-brand-charcoal font-semibold dark:text-brand-cream">
                   In Stock Availability
                 </span>
               </label>
@@ -523,9 +523,9 @@ export default function ProductForm({
                   type="checkbox"
                   checked={featured}
                   onChange={(e) => setFeatured(e.target.checked)}
-                  className="w-4 h-4 accent-brand-charcoal rounded-none cursor-pointer"
+                  className="w-4 h-4 accent-brand-charcoal dark:accent-brand-gold rounded-none cursor-pointer"
                 />
-                <span className="text-xs uppercase tracking-widest text-brand-charcoal font-semibold">
+                <span className="text-xs uppercase tracking-widest text-brand-charcoal font-semibold dark:text-brand-cream">
                   Feature on Homepage
                 </span>
               </label>
@@ -533,14 +533,14 @@ export default function ProductForm({
           </div>
 
           {/* Card 5: Size Selection */}
-          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6">
-            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3">
+          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6 dark:bg-[#121212] dark:border-white/10">
+            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3 dark:text-brand-cream dark:border-white/5">
               Sizing Attributes *
             </h2>
 
             {/* Common Size Toggles */}
             <div>
-              <p className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-3 font-semibold">
+              <p className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-3 font-semibold">
                 Quick Toggle Sizes
               </p>
               <div className="flex flex-wrap gap-2">
@@ -553,8 +553,8 @@ export default function ProductForm({
                       onClick={() => toggleSize(size)}
                       className={`px-3 py-2 text-[10px] font-semibold border transition-all duration-300 rounded-none cursor-pointer ${
                         isSelected
-                          ? 'bg-brand-charcoal border-brand-charcoal text-brand-cream'
-                          : 'bg-transparent border-brand-charcoal/10 text-brand-charcoal hover:border-brand-gold'
+                          ? 'bg-brand-charcoal border-brand-charcoal text-brand-cream dark:bg-brand-gold dark:border-brand-gold dark:text-brand-charcoal'
+                          : 'bg-transparent border-brand-charcoal/10 text-brand-charcoal hover:border-brand-gold dark:border-white/10 dark:text-white/80 dark:hover:border-brand-gold'
                       }`}
                     >
                       {size}
@@ -565,8 +565,8 @@ export default function ProductForm({
             </div>
 
             {/* Custom Sizing Add */}
-            <div className="pt-2 border-t border-brand-charcoal/5">
-              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+            <div className="pt-2 border-t border-brand-charcoal/5 dark:border-white/5">
+              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                 Add Custom Size
               </label>
               <div className="flex gap-2">
@@ -575,12 +575,12 @@ export default function ProductForm({
                   placeholder="e.g. One Size, L-XL..."
                   value={customSize}
                   onChange={(e) => setCustomSize(e.target.value)}
-                  className="flex-1 px-3 py-2 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none"
+                  className="flex-1 px-3 py-2 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream"
                 />
                 <button
                   type="button"
                   onClick={addCustomSize}
-                  className="px-4 py-2 border border-brand-charcoal bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 text-[10px] uppercase tracking-widest font-semibold"
+                  className="px-4 py-2 border border-brand-charcoal bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 dark:border-brand-gold dark:bg-brand-gold dark:text-brand-charcoal dark:hover:bg-brand-gold/90 text-[10px] uppercase tracking-widest font-semibold"
                 >
                   Add
                 </button>
@@ -590,12 +590,12 @@ export default function ProductForm({
             {/* Rendered Selected Sizes */}
             {selectedSizes.length > 0 && (
               <div className="pt-2">
-                <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 mb-1 font-semibold">Selected:</p>
+                <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 mb-1 font-semibold dark:text-white/40">Selected:</p>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedSizes.map(size => (
                     <span 
                       key={size}
-                      className="inline-flex items-center gap-1.5 px-2 py-1 bg-brand-cream text-[9px] uppercase tracking-widest border border-brand-charcoal/10 font-semibold"
+                      className="inline-flex items-center gap-1.5 px-2 py-1 bg-brand-cream text-[9px] uppercase tracking-widest border border-brand-charcoal/10 dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream font-semibold"
                     >
                       {size}
                       <button 
@@ -613,14 +613,14 @@ export default function ProductForm({
           </div>
 
           {/* Card 6: Color Selection */}
-          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6">
-            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3">
+          <div className="bg-white border border-brand-charcoal/10 p-6 md:p-8 space-y-6 dark:bg-[#121212] dark:border-white/10">
+            <h2 className="text-xs uppercase tracking-widest font-semibold text-brand-charcoal border-b border-brand-charcoal/5 pb-3 dark:text-brand-cream dark:border-white/5">
               Color Attributes
             </h2>
 
             {/* Common Color Toggles */}
             <div>
-              <p className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-3 font-semibold">
+              <p className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-3 font-semibold">
                 Quick Toggle Colors
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -633,8 +633,8 @@ export default function ProductForm({
                       onClick={() => toggleColor(color)}
                       className={`px-2.5 py-1.5 text-[9px] uppercase tracking-widest font-semibold border transition-all duration-300 rounded-none cursor-pointer ${
                         isSelected
-                          ? 'bg-brand-charcoal border-brand-charcoal text-brand-cream'
-                          : 'bg-transparent border-brand-charcoal/10 text-brand-charcoal hover:border-brand-gold'
+                          ? 'bg-brand-charcoal border-brand-charcoal text-brand-cream dark:bg-brand-gold dark:border-brand-gold dark:text-brand-charcoal'
+                          : 'bg-transparent border-brand-charcoal/10 text-brand-charcoal hover:border-brand-gold dark:border-white/10 dark:text-white/80 dark:hover:border-brand-gold'
                       }`}
                     >
                       {color}
@@ -645,8 +645,8 @@ export default function ProductForm({
             </div>
 
             {/* Custom Color Add */}
-            <div className="pt-2 border-t border-brand-charcoal/5">
-              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 mb-2 font-semibold">
+            <div className="pt-2 border-t border-brand-charcoal/5 dark:border-white/5">
+              <label className="block text-[10px] uppercase tracking-widest text-brand-charcoal/60 dark:text-white/60 mb-2 font-semibold">
                 Add Custom Color
               </label>
               <div className="flex gap-2">
@@ -655,12 +655,12 @@ export default function ProductForm({
                   placeholder="e.g. Muted Gold, Olive Drab..."
                   value={customColor}
                   onChange={(e) => setCustomColor(e.target.value)}
-                  className="flex-1 px-3 py-2 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none"
+                  className="flex-1 px-3 py-2 bg-brand-cream border border-brand-charcoal/10 text-brand-charcoal text-xs rounded-none dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream"
                 />
                 <button
                   type="button"
                   onClick={addCustomColor}
-                  className="px-4 py-2 border border-brand-charcoal bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 text-[10px] uppercase tracking-widest font-semibold"
+                  className="px-4 py-2 border border-brand-charcoal bg-brand-charcoal text-brand-cream hover:bg-brand-charcoal/90 dark:border-brand-gold dark:bg-brand-gold dark:text-brand-charcoal dark:hover:bg-brand-gold/90 text-[10px] uppercase tracking-widest font-semibold"
                 >
                   Add
                 </button>
@@ -670,12 +670,12 @@ export default function ProductForm({
             {/* Rendered Selected Colors */}
             {selectedColors.length > 0 && (
               <div className="pt-2">
-                <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 mb-1 font-semibold">Selected:</p>
+                <p className="text-[9px] uppercase tracking-widest text-brand-charcoal/50 mb-1 font-semibold dark:text-white/40">Selected:</p>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedColors.map(color => (
                     <span 
                       key={color}
-                      className="inline-flex items-center gap-1.5 px-2 py-1 bg-brand-cream text-[9px] uppercase tracking-widest border border-brand-charcoal/10 font-semibold"
+                      className="inline-flex items-center gap-1.5 px-2 py-1 bg-brand-cream text-[9px] uppercase tracking-widest border border-brand-charcoal/10 dark:bg-[#1A1A1A] dark:border-white/10 dark:text-brand-cream font-semibold"
                     >
                       {color}
                       <button 
