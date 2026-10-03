@@ -1,0 +1,145 @@
+/* AurenStoreScroll Component Styles */
+
+.auren-scroll-container {
+  position: relative;
+  width: 100%;
+  background-color: #121212;
+  color: #FAF9F6;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.auren-scroll-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212;
+}
+
+.auren-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Cinematic Vignette Overlays */
+.auren-vignette-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.7) 0%, rgba(18, 18, 18, 0.25) 55%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.auren-vignette-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  background: linear-gradient(0deg, rgba(18, 18, 18, 0.85) 0%, rgba(18, 18, 18, 0.3) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Bottom fade transition to next section */
+.auren-section-exit-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, var(--color-brand-cream, #FAF9F6));
+  pointer-events: none;
+  z-index: 15;
+  transition: opacity 0.4s ease;
+}
+
+/* Minimal Luxury Loading Screen */
+.auren-loader-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #121212;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+}
+
+.auren-loader-overlay.auren-loader-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.auren-loader-bar {
+  width: 140px;
+  height: 1px;
+  background: rgba(250, 249, 246, 0.15);
+  position: relative;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.auren-loader-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #B8A07E;
+  transition: width 0.25s ease-out;
+}
+
+/* Interactive Text Layers (managed via direct DOM ref manipulation for 120fps smoothness) */
+.auren-overlay-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.auren-interactive-btn {
+  pointer-events: auto;
+}
+
+/* Text glow & crisp typography */
+.auren-text-shadow {
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.65), 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Pulse animation for scroll hint */
+@keyframes auren-pulse-line {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 0.9;
+  }
+}
+
+.auren-scroll-pulse {
+  animation: auren-pulse-line 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

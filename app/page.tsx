@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { getCategories, getProducts } from '@/lib/services';
 import ProductGrid from '@/components/product/ProductGrid';
 import { FadeIn, SlideUp, StaggerContainer, StaggerChild } from '@/components/motion/Transitions';
+import AurenStoreScroll from '@/components/AurenStoreScroll';
 
 export default async function HomePage() {
   // Load data concurrently on server
@@ -12,58 +13,22 @@ export default async function HomePage() {
   ]);
 
   return (
-    <div className="space-y-20 pb-20 overflow-hidden">
-      {/* 1. HERO SECTION */}
-      <section className="relative h-[85vh] flex items-center justify-center bg-brand-charcoal text-brand-cream select-none">
-        {/* Hero Background Image */}
-        <div className="absolute inset-0 z-0 bg-brand-charcoal">
-          <Image
-            src="/images/mens_hero_bg.png"
-            alt="Auren Editorial Hero"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-35 object-center"
-            unoptimized
-          />
-        </div>
+    <>
+      {/* 1. CINEMATIC STORE JOURNEY (SCROLL-DRIVEN FRAME ANIMATION) */}
+      <AurenStoreScroll
+        totalFrames={120}
+        framePath="/auren-store-frames/"
+        prefix=""
+        padDigits={5}
+        extension="jpg"
+        scrollDistance="500vh"
+        fitMode="cover"
+        className="-mt-24 md:-mt-28"
+      />
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-6">
-          <FadeIn delay={0.2} duration={0.8}>
-            <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-brand-beige">
-              Curated Men&apos;s Style / Effortless Modesty
-            </p>
-          </FadeIn>
-          <SlideUp delay={0.4} duration={0.8}>
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase leading-none">
-              Style with Intention
-            </h1>
-          </SlideUp>
-          <SlideUp delay={0.6} duration={0.8}>
-            <p className="text-sm sm:text-base md:text-lg text-brand-cream/80 max-w-xl mx-auto font-light leading-relaxed">
-              Discover clean, modern cuts crafted for individuals who value both contemporary aesthetics and covered comfort.
-            </p>
-          </SlideUp>
-          <SlideUp delay={0.8} duration={0.8} className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/catalog"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-xs font-semibold uppercase tracking-widest bg-brand-cream text-brand-charcoal border border-brand-cream hover:bg-transparent hover:text-brand-cream transition-all duration-300 rounded-none text-center"
-            >
-              Shop Collection
-            </Link>
-            <Link
-              href="/lookbook"
-              className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-xs font-semibold uppercase tracking-widest border border-brand-cream text-brand-cream hover:bg-brand-cream hover:text-brand-charcoal transition-all duration-300 rounded-none text-center"
-            >
-              View Lookbook
-            </Link>
-          </SlideUp>
-        </div>
-      </section>
-
-      {/* 2. TRUST SECTION / BADGES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="space-y-20 pb-20 overflow-hidden">
+        {/* 2. TRUST SECTION / BADGES */}
+        <section id="collection-start" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-8 border-y border-brand-charcoal/10">
           <StaggerChild className="flex flex-col items-center text-center space-y-2">
             <div className="w-10 h-10 flex items-center justify-center border border-brand-charcoal/10 rounded-full text-brand-gold">
@@ -194,5 +159,6 @@ export default async function HomePage() {
         </div>
       </section>
     </div>
+    </>
   );
 }
