@@ -7,11 +7,12 @@ import { MOCK_CATEGORIES, MOCK_PRODUCTS, MOCK_LOOKBOOK } from './mockData';
 
 // Helper to check if Supabase is configured
 function isSupabaseConfigured(): boolean {
+  const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
   return (
     !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
     process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://your-project-id.supabase.co' &&
-    !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY &&
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.your-anon-key-here'
+    !!anonKey &&
+    anonKey !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.your-anon-key-here'
   );
 }
 

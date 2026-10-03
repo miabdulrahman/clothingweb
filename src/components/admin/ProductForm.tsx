@@ -109,7 +109,7 @@ export default function ProductForm({
     setImageUrls(prev => prev.filter((_, idx) => idx !== index));
   };
 
-  // Handle local image file uploads
+  // Handle local image file uploads with automatic WebP conversion via /api/upload
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
@@ -118,53 +118,44 @@ export default function ProductForm({
     setError(null);
 
     const file = files[0];
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const isConfigured = 
-      supabaseUrl && 
-      supabaseUrl !== 'https://your-project-id.supabase.co';
 
-    if (isConfigured) {
-      try {
-        const supabase = createClient();
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Math.random().toString(36).substring(2, 15)}.${fileExt}`;
-        const filePath = `products/${fileName}`;
-
-        // Attempt upload to Supabase Storage
-        const { error: uploadError } = await supabase.storage
-          .from('product-images')
-          .upload(filePath, file);
-
-        if (uploadError) throw uploadError;
-
-        const { data: { publicUrl } } = supabase.storage
-          .from('product-images')
-          .getPublicUrl(filePath);
-
-        setImageUrls(prev => [...prev, publicUrl]);
-      } catch (err: any) {
-        console.error('File upload failed, using base64 fallback:', err);
-        // Fallback to base64 reader if storage fails
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (reader.result) {
-            setImageUrls(prev => [...prev, reader.result as string]);
-          }
-        };
-        reader.readAsDataURL(file);
-      } finally {
-        setLoading(false);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      if (slug || initialData?.slug) {
+        formData.append('productId', slug || initialData?.slug || 'products');
       }
-    } else {
-      // Mock mode file upload fallback to base64 data URL
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || `Upload failed with status ${res.status}`);
+      }
+
+      const data = await res.json();
+      if (data.url) {
+        setImageUrls(prev => [...prev, data.url]);
+      } else {
+        throw new Error('Upload succeeded but no URL was returned.');
+      }
+    } catch (err: any) {
+      console.warn('API upload failed, using client-side fallback:', err);
+      // Fallback to base64 preview for local offline development
       const reader = new FileReader();
       reader.onloadend = () => {
         if (reader.result) {
           setImageUrls(prev => [...prev, reader.result as string]);
         }
-        setLoading(false);
       };
       reader.readAsDataURL(file);
+      setError(`Notice: Cloud upload failed (${err.message}). Used local preview.`);
+    } finally {
+      setLoading(false);
+      e.target.value = '';
     }
   };
 

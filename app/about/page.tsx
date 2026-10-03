@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { FadeIn, SlideUp, StaggerContainer, StaggerChild } from '@/components/motion/Transitions';
+import { resolveProductImage } from '@/lib/supabase/storage';
 
 export const metadata = {
   title: 'Our Philosophy — About Us | AUREN',
@@ -13,7 +14,7 @@ export default function AboutPage() {
       <section className="relative h-[45vh] flex items-center justify-center bg-brand-charcoal text-brand-cream select-none">
         <div className="absolute inset-0 bg-brand-charcoal">
           <Image
-            src="/images/mens_hero_bg.png"
+            src={resolveProductImage('mens_hero_bg')}
             alt="Auren Brand Philosophy"
             fill
             className="object-cover opacity-25 object-center"
@@ -89,7 +90,7 @@ export default function AboutPage() {
         </div>
         <div className="relative aspect-[3/2] overflow-hidden bg-brand-charcoal">
           <Image
-            src="/images/mens_linen_shirt.png"
+            src={resolveProductImage('mens_linen_shirt')}
             alt="Opaque Linen overlay drape"
             fill
             className="object-cover opacity-80"

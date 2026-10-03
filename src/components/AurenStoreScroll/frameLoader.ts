@@ -51,7 +51,7 @@ export function getFrameUrl(
     framePath = '/auren-store-frames/',
     prefix = '',
     padDigits = 5,
-    extension = 'jpg',
+    extension = 'webp',
   } = options;
 
   const basePath = framePath.endsWith('/') ? framePath : `${framePath}/`;
@@ -83,7 +83,7 @@ export function createFramePreloader(
     framePath: urlOptions.framePath ?? '/auren-store-frames/',
     prefix: urlOptions.prefix ?? '',
     padDigits: urlOptions.padDigits ?? 5,
-    extension: urlOptions.extension ?? 'jpg',
+    extension: urlOptions.extension ?? 'webp',
   };
 
   const images: (HTMLImageElement | null)[] = new Array(totalFrames).fill(null);

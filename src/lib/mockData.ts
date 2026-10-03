@@ -3,6 +3,7 @@
 // ============================================
 
 import { Product, Category, LookbookItem } from '@/types';
+import { resolveProductImage } from '@/lib/supabase/storage';
 
 export const MOCK_CATEGORIES: Category[] = [
   {
@@ -10,7 +11,7 @@ export const MOCK_CATEGORIES: Category[] = [
     name: 'Oversized Basics',
     slug: 'oversized-basics',
     description: 'Everyday essentials designed with a relaxed, modern silhouette.',
-    image: '/images/mens_oversized_tee.png',
+    image: resolveProductImage('mens_oversized_tee'),
     sort_order: 1,
     created_at: new Date().toISOString()
   },
@@ -19,7 +20,7 @@ export const MOCK_CATEGORIES: Category[] = [
     name: 'Linen Collection',
     slug: 'linen-collection',
     description: 'Lightweight, breathable linen pieces for effortless modesty.',
-    image: '/images/mens_linen_shirt.png',
+    image: resolveProductImage('mens_linen_shirt'),
     sort_order: 2,
     created_at: new Date().toISOString()
   },
@@ -28,7 +29,7 @@ export const MOCK_CATEGORIES: Category[] = [
     name: 'Daily Wear',
     slug: 'daily-wear',
     description: 'Comfortable, durable items optimized for daily activities.',
-    image: '/images/mens_oversized_tee.png',
+    image: resolveProductImage('mens_oversized_tee'),
     sort_order: 3,
     created_at: new Date().toISOString()
   },
@@ -37,7 +38,7 @@ export const MOCK_CATEGORIES: Category[] = [
     name: 'Occasion Wear',
     slug: 'occasion-wear',
     description: 'Elevated and formal attire for special gatherings and celebrations.',
-    image: '/images/mens_kurta_fit.png',
+    image: resolveProductImage('mens_kurta_fit'),
     sort_order: 4,
     created_at: new Date().toISOString()
   },
@@ -46,7 +47,7 @@ export const MOCK_CATEGORIES: Category[] = [
     name: 'Travel Fits',
     slug: 'travel-fits',
     description: 'Loose-fitting, packable, and layered outfits perfect for travel.',
-    image: '/images/mens_streetwear_fit.png',
+    image: resolveProductImage('mens_streetwear_fit'),
     sort_order: 5,
     created_at: new Date().toISOString()
   },
@@ -55,7 +56,7 @@ export const MOCK_CATEGORIES: Category[] = [
     name: 'Minimal Streetwear',
     slug: 'minimal-streetwear',
     description: 'Contemporary streetwear style with relaxed and modest tailoring.',
-    image: '/images/mens_streetwear_fit.png',
+    image: resolveProductImage('mens_streetwear_fit'),
     sort_order: 6,
     created_at: new Date().toISOString()
   },
@@ -64,7 +65,7 @@ export const MOCK_CATEGORIES: Category[] = [
     name: 'Layering Pieces',
     slug: 'layering-pieces',
     description: 'Cardigans, dusters, and vests to add depth and modesty to any look.',
-    image: '/images/mens_streetwear_fit.png',
+    image: resolveProductImage('mens_streetwear_fit'),
     sort_order: 7,
     created_at: new Date().toISOString()
   },
@@ -92,7 +93,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Sand Beige', 'Charcoal Black', 'Off-White', 'Muted Olive'],
     images: [
-      '/images/mens_oversized_tee.png'
+      resolveProductImage('mens_oversized_tee')
     ],
     featured: true,
     in_stock: true,
@@ -117,7 +118,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Natural Oat', 'Olive Oil', 'Classic Ivory'],
     images: [
-      '/images/mens_linen_shirt.png'
+      resolveProductImage('mens_linen_shirt')
     ],
     featured: true,
     in_stock: true,
@@ -142,7 +143,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Sage Green', 'Espresso Brown', 'Soft Onyx'],
     images: [
-      '/images/mens_duster_cardigan.png'
+      resolveProductImage('mens_duster_cardigan')
     ],
     featured: true,
     in_stock: true,
@@ -167,7 +168,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['M', 'L', 'XL'],
     colors: ['Sea Salt White', 'Sage Green', 'Warm Sand'],
     images: [
-      '/images/mens_resort_shirt.png'
+      resolveProductImage('mens_resort_shirt')
     ],
     featured: false,
     in_stock: true,
@@ -192,7 +193,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['S-M', 'L-XL'],
     colors: ['Slate Grey', 'Olive Drab', 'Camel Sand'],
     images: [
-      '/images/mens_hooded_duster.png'
+      resolveProductImage('mens_hooded_duster')
     ],
     featured: true,
     in_stock: true,
@@ -217,7 +218,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Desert Khaki', 'Onyx Black'],
     images: [
-      '/images/mens_travel_cargo.png'
+      resolveProductImage('mens_travel_cargo')
     ],
     featured: false,
     in_stock: true,
@@ -242,7 +243,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Dusty Rose', 'Deep Mulberry', 'Navy Blue'],
     images: [
-      '/images/mens_kurta_fit.png'
+      resolveProductImage('mens_kurta_fit')
     ],
     featured: true,
     in_stock: true,
@@ -267,7 +268,7 @@ export const MOCK_PRODUCTS: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Ivory White', 'True Black', 'Warm Nude'],
     images: [
-      '/images/mens_slip_tunic.png'
+      resolveProductImage('mens_slip_tunic')
     ],
     featured: false,
     in_stock: true,
@@ -286,7 +287,7 @@ export const MOCK_LOOKBOOK: LookbookItem[] = [
   {
     id: 'b1000000-0000-0000-0000-000000000001',
     title: 'Oversized Minimalism',
-    image: '/images/mens_hero_bg.png',
+    image: resolveProductImage('mens_hero_bg'),
     caption: 'A clean combination of our Oversized Premium Tee and Relaxed Linen Trouser in natural, warm sand tones.',
     collection: 'Summer 2026',
     related_product_ids: ['a1000000-0000-0000-0000-000000000001', 'a1000000-0000-0000-0000-000000000002'],
@@ -296,7 +297,7 @@ export const MOCK_LOOKBOOK: LookbookItem[] = [
   {
     id: 'b1000000-0000-0000-0000-000000000002',
     title: 'Modern Utility & Layers',
-    image: '/images/mens_streetwear_fit.png',
+    image: resolveProductImage('mens_streetwear_fit'),
     caption: 'Layering with the Heavyweight Hooded Duster and Modular Travel Cargo Pants for an active yet modest urban silhouette.',
     collection: 'Winter 2026',
     related_product_ids: ['a1000000-0000-0000-0000-000000000005', 'a1000000-0000-0000-0000-000000000006'],
@@ -306,7 +307,7 @@ export const MOCK_LOOKBOOK: LookbookItem[] = [
   {
     id: 'b1000000-0000-0000-0000-000000000003',
     title: 'Traditional Modernity',
-    image: '/images/mens_kurta_fit.png',
+    image: resolveProductImage('mens_kurta_fit'),
     caption: 'The Textured Crepe Kurta Tunic paired over our Essential Layering Slip Tunic for structured modest formal look.',
     collection: 'Spring 2026',
     related_product_ids: ['a1000000-0000-0000-0000-000000000007', 'a1000000-0000-0000-0000-000000000008'],

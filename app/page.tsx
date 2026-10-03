@@ -4,6 +4,7 @@ import { getCategories, getProducts } from '@/lib/services';
 import ProductGrid from '@/components/product/ProductGrid';
 import { FadeIn, SlideUp, StaggerContainer, StaggerChild } from '@/components/motion/Transitions';
 import AurenStoreScroll from '@/components/AurenStoreScroll';
+import { resolveProductImage, getFramesBasePath } from '@/lib/supabase/storage';
 
 export default async function HomePage() {
   // Load data concurrently on server
@@ -16,12 +17,12 @@ export default async function HomePage() {
     <>
       {/* 1. CINEMATIC STORE JOURNEY (SCROLL-DRIVEN FRAME ANIMATION) */}
       <AurenStoreScroll
-        totalFrames={120}
-        framePath="/auren-store-frames/"
+        totalFrames={240}
+        framePath={getFramesBasePath()}
         prefix=""
         padDigits={5}
-        extension="jpg"
-        scrollDistance="500vh"
+        extension="webp"
+        scrollDistance="330vh"
         fitMode="cover"
         className="-mt-24 md:-mt-28"
       />
@@ -147,7 +148,7 @@ export default async function HomePage() {
             </FadeIn>
             <SlideUp className="relative aspect-[4/3] overflow-hidden bg-brand-cream/5 border border-brand-cream/10">
               <Image
-                src="/images/mens_kurta_fit.png"
+                src={resolveProductImage('mens_kurta_fit')}
                 alt="Editorial lookbook layout"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

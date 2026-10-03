@@ -27,7 +27,7 @@ export interface AurenStoreScrollProps extends FrameUrlOptions {
    */
   padDigits?: number;
   /**
-   * Image format extension without leading dot (default: 'jpg')
+   * Image format extension without leading dot (default: 'webp')
    */
   extension?: string;
   /**
@@ -55,7 +55,7 @@ export default function AurenStoreScroll({
   framePath = '/auren-store-frames/',
   prefix = '',
   padDigits = 5,
-  extension = 'jpg',
+  extension = 'webp',
   scrollDistance = '500vh',
   fitMode = 'cover',
   className = '',
@@ -248,7 +248,7 @@ export default function AurenStoreScroll({
       const delta = target - current;
 
       if (Math.abs(delta) > 0.0001) {
-        progressRef.current += delta * 0.22;
+        progressRef.current += delta * 0.08; // Decreased to 0.08 for a "gliding", ultra-smooth feel
       } else {
         progressRef.current = target;
       }
@@ -256,7 +256,7 @@ export default function AurenStoreScroll({
       const activeProgress = progressRef.current;
       const calculatedFrame = Math.min(
         totalFrames - 1,
-        Math.max(0, Math.floor(activeProgress * (totalFrames - 1)))
+        Math.max(0, Math.round(activeProgress * (totalFrames - 1)))
       );
 
       const preloader = preloaderRef.current;
@@ -330,7 +330,7 @@ export default function AurenStoreScroll({
       prefix,
       padDigits,
       extension,
-      concurrency: 6,
+      concurrency: 15,
       onProgress: ({ percent }) => {
         setLoadingPercent(percent);
       },
