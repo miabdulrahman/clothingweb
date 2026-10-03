@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { getWhatsAppDisplayNumber, buildWhatsAppInquiryUrl } from '@/lib/whatsapp';
 
@@ -21,7 +22,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 mb-12">
           {/* Brand Col */}
           <div className="space-y-4 col-span-1 md:col-span-1">
-            <h3 className="font-display text-2xl font-bold tracking-widest">AUREN</h3>
+            <Link href="/" className="inline-block">
+              <div className="relative h-7 w-28 flex items-center">
+                <Image
+                  src="/images/auren_logo_wordmark.png"
+                  alt="AUREN"
+                  fill
+                  sizes="112px"
+                  className="object-contain brightness-110"
+                />
+              </div>
+            </Link>
             <p className="text-sm text-brand-beige/85 max-w-xs leading-relaxed font-light">
               A modern modest fashion platform for clean, stylish, everyday wear. Curation with intention and confidence.
             </p>

@@ -24,12 +24,21 @@ export const metadata: Metadata = {
   title: 'AUREN — Premium Modest Fashion Discovery & Curation',
   description:
     'Discover clean, stylish, everyday modest fashion. Handpicked collections featuring oversized cuts, premium linen, and layered looks with seamless WhatsApp ordering.',
+  icons: {
+    icon: [
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.png', sizes: '32x32', type: 'image/png' },
+    ],
+    shortcut: '/favicon.png',
+    apple: '/icon.png',
+  },
   openGraph: {
     title: 'AUREN — Premium Modest Fashion',
     description: 'Clean, intentional, everyday modest clothing with seamless WhatsApp ordering.',
     type: 'website',
     locale: 'en_US',
     siteName: 'AUREN',
+    images: [{ url: '/images/auren_logo.png' }],
   },
 };
 

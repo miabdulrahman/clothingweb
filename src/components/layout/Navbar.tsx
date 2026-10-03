@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -75,9 +76,19 @@ export default function Navbar() {
             <div className="flex-shrink-0">
               <Link
                 href="/"
-                className="font-display text-2xl font-bold tracking-widest text-brand-charcoal"
+                className="flex items-center group py-1"
+                aria-label="AUREN Home"
               >
-                AUREN
+                <div className="relative h-7 sm:h-8 w-24 sm:w-28 flex items-center">
+                  <Image
+                    src="/images/auren_logo_wordmark.png"
+                    alt="AUREN"
+                    fill
+                    sizes="(max-width: 640px) 96px, 112px"
+                    className="object-contain transition-transform duration-300 group-hover:scale-105"
+                    priority
+                  />
+                </div>
               </Link>
             </div>
 
