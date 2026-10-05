@@ -200,7 +200,7 @@ export default function AurenStoreScroll({
         }
       }
 
-      // 4. Outro Collection Reveal Overlay (78% -> 100%)
+      // 4. Outro Collection Reveal Overlay & Canvas Blur (76% -> 100%)
       if (outroOverlayRef.current) {
         if (progress >= 0.76) {
           outroOverlayRef.current.style.display = 'flex';
@@ -208,12 +208,24 @@ export default function AurenStoreScroll({
           outroOverlayRef.current.style.opacity = String(fadeInProgress);
           const translateY = 30 * (1 - fadeInProgress);
           outroOverlayRef.current.style.transform = `translateY(${translateY}px)`;
+
+          // Gradual cinematic blur on the background canvas
+          if (canvasRef.current) {
+            const blurValue = fadeInProgress * 16; // Up to 16px blur
+            canvasRef.current.style.filter = `blur(${blurValue}px)`;
+            canvasRef.current.style.transform = `scale(${1 + fadeInProgress * 0.05})`; // Slight zoom
+          }
         } else {
           outroOverlayRef.current.style.display = 'none';
+          
+          if (canvasRef.current && canvasRef.current.style.filter !== 'blur(0px)') {
+            canvasRef.current.style.filter = 'blur(0px)';
+            canvasRef.current.style.transform = 'scale(1)';
+          }
         }
       }
 
-      // 5. Exit Transition Gradient (90% -> 100%)
+      // 5. Exit Transition Gradient (88% -> 100%)
       if (exitFadeRef.current) {
         if (progress >= 0.88) {
           const exitAlpha = (progress - 0.88) / 0.12;
