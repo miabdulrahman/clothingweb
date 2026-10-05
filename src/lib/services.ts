@@ -298,18 +298,37 @@ export async function getLookbookItems(): Promise<LookbookItem[]> {
     
     // For each lookbook item, fetch its related products
     const items = data || [];
-    const hydratedItems = await Promise.all(
-      items.map(async (item) => {
-        if (item.related_product_ids && item.related_product_ids.length > 0) {
-          const { data: products } = await supabase
-            .from('products')
-            .select('*, category:categories(*)')
-            .in('id', item.related_product_ids);
-          return { ...item, related_products: products || [] };
-        }
-        return { ...item, related_products: [] };
-      })
-    );
+    
+    const allProductIds = new Set<string>();
+    items.forEach(item => {
+      if (item.related_product_ids && Array.isArray(item.related_product_ids)) {
+        item.related_product_ids.forEach((id: string) => allProductIds.add(id));
+      }
+    });
+
+    const uniqueProductIds = Array.from(allProductIds);
+    let allProducts: Product[] = [];
+    
+    if (uniqueProductIds.length > 0) {
+      const { data: productsData } = await supabase
+        .from('products')
+        .select('*, category:categories(*)')
+        .in('id', uniqueProductIds);
+        
+      if (productsData) {
+        allProducts = productsData;
+      }
+    }
+
+    const hydratedItems = items.map(item => {
+      let related_products: Product[] = [];
+      if (item.related_product_ids && Array.isArray(item.related_product_ids)) {
+        related_products = item.related_product_ids
+          .map((id: string) => allProducts.find(p => p.id === id))
+          .filter(Boolean) as Product[];
+      }
+      return { ...item, related_products };
+    });
 
     return hydratedItems;
   } catch (err) {
