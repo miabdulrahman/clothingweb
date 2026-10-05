@@ -192,9 +192,9 @@ export default function AurenStoreScroll({
           } else if (progress > 0.47) {
             alpha = 1 - (progress - 0.47) / 0.05;
           }
-          midBadgeRef.current.style.display = 'block';
+          midBadgeRef.current.style.display = 'flex';
           midBadgeRef.current.style.opacity = String(Math.max(0, Math.min(1, alpha)));
-          midBadgeRef.current.style.transform = 'translate(-50%, -50%) scale(1)';
+          midBadgeRef.current.style.transform = 'scale(1)';
         } else {
           midBadgeRef.current.style.display = 'none';
         }
@@ -446,11 +446,11 @@ export default function AurenStoreScroll({
         {/* 2. Midway Entrance Milestone Badge (36% - 52%) */}
         <div
           ref={midBadgeRef}
-          className="absolute top-1/2 left-1/2 z-25 pointer-events-none -translate-x-1/2 -translate-y-1/2 text-center"
+          className="auren-overlay-layer flex-col"
           style={{ display: 'none', opacity: 0 }}
         >
-          <div className="px-5 py-2 glass-dark backdrop-blur-md border border-white/10 rounded-full inline-block shadow-2xl">
-            <p className="text-[10px] sm:text-xs font-light tracking-[0.35em] uppercase text-brand-cream/90">
+          <div className="px-5 py-2 glass-dark backdrop-blur-md border border-white/10 rounded-full shadow-2xl">
+            <p className="text-[10px] sm:text-xs font-light tracking-[0.35em] uppercase text-brand-cream/90 pl-[0.35em] text-center">
               Entering The Collection
             </p>
           </div>

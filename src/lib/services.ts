@@ -2,6 +2,7 @@
 // Modest Fashion Platform — Data Service Layer
 // ============================================
 
+import { unstable_cache } from 'next/cache';
 import { Product, Category, LookbookItem, AnalyticsEvent } from '@/types';
 import { MOCK_CATEGORIES, MOCK_PRODUCTS, MOCK_LOOKBOOK } from './mockData';
 
@@ -31,7 +32,7 @@ async function getSupabaseClient() {
 // Category Services
 // ----------------------------------------------------
 
-export async function getCategories(): Promise<Category[]> {
+export const getCategories = unstable_cache(async (): Promise<Category[]> => {
   if (!isSupabaseConfigured()) {
     return MOCK_CATEGORIES;
   }
@@ -49,13 +50,13 @@ export async function getCategories(): Promise<Category[]> {
     console.error('Error fetching categories from Supabase, falling back to mock:', err);
     return MOCK_CATEGORIES;
   }
-}
+}, ['categories-cache'], { revalidate: 3600, tags: ['categories'] });
 
 // ----------------------------------------------------
 // Product Services
 // ----------------------------------------------------
 
-export async function getProducts(options?: {
+export const getProducts = unstable_cache(async (options?: {
   categorySlug?: string;
   featured?: boolean;
   limit?: number;
@@ -63,7 +64,7 @@ export async function getProducts(options?: {
   sizes?: string[];
   colors?: string[];
   priceRange?: [number, number];
-}): Promise<Product[]> {
+}): Promise<Product[]> => {
   if (!isSupabaseConfigured()) {
     let products = [...MOCK_PRODUCTS];
 
@@ -176,7 +177,7 @@ export async function getProducts(options?: {
     // Simple filter of mock data for fallback
     return getProductsMock(options);
   }
-}
+}, ['products-cache'], { revalidate: 3600, tags: ['products'] });
 
 // Local helper to filter mock data for fallback
 function getProductsMock(options?: {
@@ -211,7 +212,7 @@ function getProductsMock(options?: {
   }));
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | null> {
+export const getProductBySlug = unstable_cache(async (slug: string): Promise<Product | null> => {
   if (!isSupabaseConfigured()) {
     const product = MOCK_PRODUCTS.find(p => p.slug === slug);
     if (!product) return null;
@@ -243,9 +244,9 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
       category: MOCK_CATEGORIES.find(c => c.id === product.category_id)
     };
   }
-}
+}, ['product-slug-cache'], { revalidate: 3600, tags: ['products'] });
 
-export async function getRelatedProducts(productId: string, categoryId: string, limit = 4): Promise<Product[]> {
+export const getRelatedProducts = unstable_cache(async (productId: string, categoryId: string, limit = 4): Promise<Product[]> => {
   if (!isSupabaseConfigured()) {
     return MOCK_PRODUCTS
       .filter(p => p.category_id === categoryId && p.id !== productId)
@@ -273,13 +274,13 @@ export async function getRelatedProducts(productId: string, categoryId: string, 
       .filter(p => p.category_id === categoryId && p.id !== productId)
       .slice(0, limit);
   }
-}
+}, ['related-products-cache'], { revalidate: 3600, tags: ['products'] });
 
 // ----------------------------------------------------
 // Lookbook Services
 // ----------------------------------------------------
 
-export async function getLookbookItems(): Promise<LookbookItem[]> {
+export const getLookbookItems = unstable_cache(async (): Promise<LookbookItem[]> => {
   if (!isSupabaseConfigured()) {
     return MOCK_LOOKBOOK.map(item => ({
       ...item,
@@ -338,7 +339,7 @@ export async function getLookbookItems(): Promise<LookbookItem[]> {
       related_products: MOCK_PRODUCTS.filter(p => item.related_product_ids.includes(p.id))
     }));
   }
-}
+}, ['lookbook-cache'], { revalidate: 3600, tags: ['lookbook'] });
 
 // ----------------------------------------------------
 // Analytics Services (Fire and Forget)
