@@ -4,7 +4,7 @@ import { getCategories, getProducts } from '@/lib/services';
 import ProductGrid from '@/components/product/ProductGrid';
 import { FadeIn, SlideUp, StaggerContainer, StaggerChild } from '@/components/motion/Transitions';
 import AurenStoreScroll from '@/components/AurenStoreScroll';
-import { resolveProductImage, getFramesBasePath } from '@/lib/supabase/storage';
+import { resolveProductImage, getFramesBasePath, getMobileFramesBasePath } from '@/lib/supabase/storage';
 
 export default async function HomePage() {
   // Load data concurrently on server
@@ -19,6 +19,7 @@ export default async function HomePage() {
       <AurenStoreScroll
         totalFrames={240}
         framePath={getFramesBasePath()}
+        mobileFramePath={getMobileFramesBasePath()}
         prefix=""
         padDigits={5}
         extension="webp"

@@ -15,9 +15,17 @@ export interface AurenStoreScrollProps extends FrameUrlOptions {
    */
   totalFrames?: number;
   /**
-   * Path to the folder containing frames (default: '/auren-store-frames/')
+   * Path to the folder containing desktop frames (default: '/auren-store-frames/')
    */
   framePath?: string;
+  /**
+   * Path to the folder containing mobile frames (default: '/mobile-store-frames/')
+   */
+  mobileFramePath?: string;
+  /**
+   * Breakpoint width in pixels below which mobile frames are used (default: 768)
+   */
+  mobileBreakpoint?: number;
   /**
    * Optional prefix before the zero-padded index (e.g. 'frame_' or '') (default: '')
    */
@@ -53,6 +61,8 @@ export const TOTAL_FRAMES_DEFAULT = 120;
 export default function AurenStoreScroll({
   totalFrames = TOTAL_FRAMES_DEFAULT,
   framePath = '/auren-store-frames/',
+  mobileFramePath = '/mobile-store-frames/',
+  mobileBreakpoint = 768,
   prefix = '',
   padDigits = 5,
   extension = 'webp',
@@ -84,6 +94,36 @@ export default function AurenStoreScroll({
   // React State (Only for initial preloader UI to avoid scroll performance bottlenecks)
   const [loadingPercent, setLoadingPercent] = useState(0);
   const [isReady, setIsReady] = useState(false);
+
+  // Active frame path based on screen size (desktop vs mobile frames)
+  const [activePath, setActivePath] = useState<string>(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < mobileBreakpoint && mobileFramePath) {
+      return mobileFramePath;
+    }
+    return framePath;
+  });
+
+  // Track responsive breakpoint changes (e.g. device rotation, window resize)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const mediaQuery = window.matchMedia(`(max-width: ${mobileBreakpoint - 1}px)`);
+    const handleViewportChange = (e: MediaQueryListEvent | MediaQueryList) => {
+      const isMobile = e.matches;
+      const target = isMobile && mobileFramePath ? mobileFramePath : framePath;
+      setActivePath((prev) => (prev !== target ? target : prev));
+    };
+
+    handleViewportChange(mediaQuery);
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleViewportChange);
+      return () => mediaQuery.removeEventListener('change', handleViewportChange);
+    } else {
+      mediaQuery.addListener(handleViewportChange);
+      return () => mediaQuery.removeListener(handleViewportChange);
+    }
+  }, [framePath, mobileFramePath, mobileBreakpoint]);
 
   /**
    * High performance canvas drawer with aspect-ratio preservation
@@ -336,13 +376,20 @@ export default function AurenStoreScroll({
    * Preloader Initialization and Lifetime Management
    */
   useEffect(() => {
+    const isMobile = activePath === mobileFramePath;
+
+    // Reset progress and ready state on path switch
+    setLoadingPercent(0);
+    setIsReady(false);
+    currentFrameRef.current = -1;
+
     const preloader = createFramePreloader({
       totalFrames,
-      framePath,
+      framePath: activePath,
       prefix,
       padDigits,
       extension,
-      concurrency: 15,
+      concurrency: isMobile ? 8 : 15,
       onProgress: ({ percent }) => {
         setLoadingPercent(percent);
       },
@@ -363,7 +410,7 @@ export default function AurenStoreScroll({
       preloader.destroy();
       preloaderRef.current = null;
     };
-  }, [totalFrames, framePath, prefix, padDigits, extension, drawImageToCanvas]);
+  }, [totalFrames, activePath, mobileFramePath, prefix, padDigits, extension, drawImageToCanvas]);
 
   /**
    * Helper to scroll past the animation container smoothly

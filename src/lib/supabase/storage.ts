@@ -37,6 +37,14 @@ export function getFramesBasePath(): string {
 }
 
 /**
+ * Get the base URL for the mobile frames directory.
+ * Portrait frames (720x1280) optimized for mobile viewports.
+ */
+export function getMobileFramesBasePath(): string {
+  return '/mobile-store-frames/';
+}
+
+/**
  * Resolve a product image path. Returns the Supabase WebP URL if Supabase is
  * configured, otherwise returns the original local path as a fallback.
  *
